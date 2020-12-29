@@ -7,6 +7,10 @@ import { PagesRoutingModule } from './pages/pages.routing';
 
 const routes: Routes = [
   
+  //path: /inicio PagesRoutingModule
+  //path: /login  AuthRoutingModule
+
+
   { path:'', redirectTo:'login', pathMatch:'full' },
   { path:'**',component:NopagefoundComponent }
 
