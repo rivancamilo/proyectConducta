@@ -11,6 +11,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
+import { PagesComponent } from './pages/pages.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 const routes: Routes = [
-  { path:'inicio', component:DashboardComponent },
+  { path:'', 
+    component:PagesComponent,
+    children:[
+
+      { path:'inicio', component:DashboardComponent },
+      { path:'usuarios', component:UsuariosComponent },
+      { path:'', redirectTo:'inicio', pathMatch:'full' },  
+        
+    ]
+  },
+  
   { path:'login', component:LoginComponent },
-  { path:'usuarios', component:UsuariosComponent },
+  
   { path:'', redirectTo:'inicio', pathMatch:'full' },
   { path:'**',component:NopagefoundComponent }
 
