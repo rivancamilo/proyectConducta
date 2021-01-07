@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+<!-- ********************************************************************* -->
+<div class="row">
+    <!-- ***************************************************************** -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Form Elements</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    
+                    <canvas 
+                        baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        chartType="doughnut">
+                    </canvas>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***************************************************************** -->
+    <!-- ***************************************************************** -->
+    <!-- ***************************************************************** -->
+    <!-- ***************************************************************** -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Form Elements</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***************************************************************** -->
+
+</div>
+<!-- ********************************************************************* -->

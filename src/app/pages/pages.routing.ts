@@ -3,20 +3,24 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { EntrenamientoComponent } from './entrenamiento/entrenamiento.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
 const routes: Routes = [
 
     {
-        path: '',
+        path: 'dashboard',
         component: PagesComponent,
         children: [
 
-            { path: 'inicio', component: DashboardComponent },
+            { path: '', component: DashboardComponent },
             { path: 'usuarios', component: UsuariosComponent },
-            { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-
+            { path:'usuario', component:UsuarioComponent },
+            { path:'entrenamiento' , component:EntrenamientoComponent },
+            { path:'perfil', component:PerfilComponent}
         ]
     },
 

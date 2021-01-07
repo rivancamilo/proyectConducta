@@ -11,7 +11,7 @@ const routes: Routes = [
   //path: /login  AuthRoutingModule
 
 
-  { path:'', redirectTo:'login', pathMatch:'full' },
+  { path:'', redirectTo:'/dashboard', pathMatch:'full' },
   { path:'**',component:NopagefoundComponent }
 
 ];
