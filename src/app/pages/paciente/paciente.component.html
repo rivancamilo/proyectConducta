@@ -1,0 +1,147 @@
+<div class="row">
+    <div class="wizard-container wizard-round col-md-9">
+        
+        <form formGroup="nuevoUsuario" (ngSubmit)="crearUsuario()">
+
+            <div class="wizard-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <!-- ingresar nombres -->
+                        <div class="form-group">
+                            <label for="name">Nombres 
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="text" class="form-control" 
+                                    placeholder="Escribe tu nombre"
+                                    id="userNombres" name="userNombres" 
+                                    formControlName="userNombres">
+                        </div>
+                        <!-- nombre del usuario de red -->
+                        <div class="form-group">
+                            <label for="userSys">Username 
+                                <span class="required-label">*</span>
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="username-addon">@</span>
+                                </div>
+                                <input  type="text" class="form-control" placeholder="Ingrese username" 
+                                        id="userSys" name="userSys"
+                                        formControlName="userSys" >
+                            </div>
+                        </div>
+                        <!-- ingresar contraseña  -->
+                        <div  class="form-group">
+                            <label for="userPassword" >Contraseña 
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="password" class="form-control" 
+                                    placeholder="Escribe una contraseña segura" 
+                                    id="userPassword" name="userPassword" 
+                                    formControlName="userPassword">
+                        </div>
+                        <!-- seleccionar rol -->
+                        <div class="form-group ">
+                            <label for="userRolID" >Seleccionar Rol de Usuario 
+                                <span class="required-label">*</span>
+                            </label>
+                            <div class="select2-input">
+                                <select class="form-control" 
+                                        id="userRolID" name="userRolID"  
+                                        formControlName="userRolID" >
+                                    <option value="rol._id" > rol.nomRol </option>                                                                                
+                                </select>
+                            </div>
+                        </div>
+                        <!-- selecionar estado -->
+                        <div class="form-group">
+                            <label>Estado 
+                                <span class="required-label">*</span>
+                            </label>
+                            <div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
+                                <div class="custom-control custom-radio">
+                                    <input  type="radio" class="custom-control-input" value="activo" checked
+                                            id="activo" name="userEstado"    
+                                            formControlName="userEstado">
+                                    <label class="custom-control-label" for="activo">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input  type="radio" class="custom-control-input" 
+                                            id="inactivo" name="userEstado" value="inactivo"
+                                            formControlName="userEstado">
+                                    <label class="custom-control-label" for="inactivo">Inactivo</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <!-- ingresar apellido -->
+                        <div class="form-group">
+                            <label for="name">Apellidos 
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="text" class="form-control" placeholder="Escribe tus apellidos" 
+                                    id="userApellidos" name="userApellidos" 
+                                    formControlName="userApellidos">
+                        </div>
+
+                        <!-- ingresar email -->
+                        <div class="form-group">
+                            <label for="email">Correo Electronico
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="email" class="form-control" placeholder="Escribe tu correo electrónico" 
+                                    id="userEmail"  name="userEmail"
+                                    formControlName="userEmail">
+
+                            <small id="emailHelp" class="form-text text-muted" style="display: none;">
+                                We'll never share your email with anyone else.
+                            </small>
+                        </div>
+
+                        <!-- confirmar Contraseña -->
+                        <div  class="form-group" >
+                            <label for="confirmpassword" >Confirmar Contraseña 
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="password" class="form-control" 
+                                    placeholder="Escribe nuevamente la contraseña"
+                                    id="confirmpassword" name="confirmpassword" 
+                                    formControlName="userConfirPassword">
+                        </div>
+
+                        <!-- subir avatar -->
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-cloud-upload-alt"></i> Subir Avatar :
+                            </label>
+                            <div class="input-file input-file-image">
+                                <input  type="hidden" class="form-control" 
+                                    id="confirmpassword" name="confirmpassword" 
+                                    formControlName="userAvatar">
+                                <img class="img-upload-preview img-circle" width="100" height="100" src="" alt="preview">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="wizard-action">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-next btn-danger">
+                        <i class="fas fa-save "></i> Guardar
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            
+        </form> 
+    </div>
+</div>
