@@ -39,8 +39,8 @@
             </div>
             <ul class="nav nav-primary">
                 
-                <li class="nav-item" routerLinkActive="active">
-                    <a routerLink="/">
+                <li class="nav-item">
+                    <a routerLink="/dashboard">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -51,6 +51,53 @@
                     </span>
                     <h4 class="text-section">Components</h4>
                 </li> -->
+
+                
+
+                <li class="nav-item" routerLinkActive="active">
+                    <a data-toggle="collapse" href="#pacientes">
+                        <i class="fas fa-users"></i>
+                        <p>Pacientes</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="pacientes">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a routerLink="paciente">
+                                    <span class="sub-item">Nuevo Paciente</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="pacientes">
+                                    <span class="sub-item">Lista de Pacientes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item" routerLinkActive="active">
+                    <a data-toggle="collapse" href="#examen">
+                        <i class="fas fa-user-check"></i>
+                        <p>Entrenamientos</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="examen">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a routerLink="entrenamiento">
+                                    <span class="sub-item">Nuevo Entrenamiento</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="entrenamientos">
+                                    <span class="sub-item">Lista de Entrenamiento</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="nav-item" routerLinkActive="active">
                     <a data-toggle="collapse" href="#usuarios">
@@ -75,30 +122,7 @@
                 </li>
 
                 <li class="nav-item" routerLinkActive="active">
-                    <a data-toggle="collapse" href="#examen">
-                        <i class="fas fa-user-check"></i>
-                        <p>Entrenamientos</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="examen">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="email-inbox.html">
-                                    <span class="sub-item">Nuevo Entrenamiento</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email-compose.html">
-                                    <span class="sub-item">Lista de Entrenamiento</span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="faqs.html">
+                    <a routerLink="perfil">
                         <i class="far fa-address-card"></i>
                         <p>Perfil</p>
                         <span class="badge badge-count">6</span>

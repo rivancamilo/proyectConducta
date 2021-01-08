@@ -1,69 +1,377 @@
-<!-- Custom template | don't include it in your project! -->
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-8">
+            
+            <div class="card card-with-nav">
+
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-4" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="datos-tab" data-toggle="pill" href="#datos" role="tab"
+                                    aria-controls="datos" aria-selected="true">
+                                    <i class="far fa-address-book"></i> Datos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="seguridad-tab" data-toggle="pill" href="#seguridad" role="tab"
+                                    aria-controls="seguridad" aria-selected="false">
+                                    <i class="fas fa-user-lock"></i> Seguridad
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="temaColors-tab" data-toggle="pill" href="#temaColors" role="tab"
+                                    aria-controls="temaColors" aria-selected="false">
+                                    <i class="fas fa-user-lock"></i> Personalizar Colores
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="datos" role="tabpanel" aria-labelledby="datos-tab">
+                        <form formGroup="perfilUsuario" (ngSubmit)="actualizaPerfil()">
+                            <div class="card-body">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <!-- nombre del usuario -->
+                                        <div class="form-group">
+                                            <label for="name">Nombre
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="hidden" class="form-control" id="userId" name="userId"
+                                                formControlName="userId">
+
+                                            <input type="text" class="form-control" placeholder="Ingresa tu nombre"
+                                                id="userNombres" name="userNombres" formControlName="userNombres">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- apellidos del usuario -->
+                                        <div class="form-group">
+                                            <label for="name">Apellidos
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Ingresa tus apellidos"
+                                                id="userApellidos" name="userApellidos" formControlName="userApellidos">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <!-- corre electronico del usuario -->
+                                        <div class="form-group">
+                                            <label for="name">Email
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Ingresa tu email"
+                                                id="userEmail" name="userEmail" formControlName="userEmail">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- numero de contacto del usuario -->
+                                        <div class="form-group">
+                                            <label for="name">Numero de Contacto
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Ingresa tu número de celular" id="userContacto"
+                                                name="userContacto" formControlName="userContacto">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <!-- avatar o foto del usuario -->
+                                        <div class="form-group">
+                                            <div class="input-file input-file-image">
+                                                <img class="img-upload-preview img-circle" width="100" height="100"
+                                                    src="http://placehold.it/100x100" alt="preview">
+                                                <input type="file" class="form-control form-control-file"
+                                                    id="uploadImg1" name="uploadImg1" accept="image/*" required="">
+                                                <label for="uploadImg1"
+                                                    class="  label-input-file btn btn-black btn-round">
+                                                    <span class="btn-label">
+                                                        <i class="fa fa-file-image"></i>
+                                                    </span>
+                                                    Upload a Image
+                                                </label>
+                                            </div>
+                                        </div>
 
 
-<div class="title">Settings</div>
-<div class="custom-content">
-    <div class="switcher">
-        <div class="switch-block">
-            <h4>Logo Header</h4>
-            <div class="btnSwitch">
-                <button (click)="cambioColorHeader('dark')" type="button" class="changeLogoHeaderColor" data-color="dark"></button>
-                <button (click)="cambioColorHeader('blue')" type="button" class="selected changeLogoHeaderColor" data-color="blue"></button>
-                <button (click)="cambioColorHeader('purple')" type="button" class="changeLogoHeaderColor" data-color="purple"></button>
-                <button (click)="cambioColorHeader('light-blue')" type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
-                <button (click)="cambioColorHeader('green')" type="button" class="changeLogoHeaderColor" data-color="green"></button>
-                <button (click)="cambioColorHeader('orange')" type="button" class="changeLogoHeaderColor" data-color="orange"></button>
-                <button (click)="cambioColorHeader('red')" type="button" class="changeLogoHeaderColor" data-color="red"></button>
-                <button (click)="cambioColorHeader('white')" type="button" class="changeLogoHeaderColor" data-color="white"></button>
-                <br />
-                <button (click)="cambioColorHeader('dark2')" type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
-                <button (click)="cambioColorHeader('blue2')" type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
-                <button (click)="cambioColorHeader('purple2')" type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
-                <button (click)="cambioColorHeader('light-blue2')" type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
-                <button (click)="cambioColorHeader('green2')" type="button" class="changeLogoHeaderColor" data-color="green2"></button>
-                <button (click)="cambioColorHeader('orange2')" type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
-                <button (click)="cambioColorHeader('red2')" type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!-- informacion del usuario -->
+                                        <div class="form-group">
+                                            <label for="name">Sobre mi:
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <textarea class="form-control" rows="7" id="userSobreMi" name="userSobreMi"
+                                                formControlName="userSobreMi">
+</textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="text-right mt-3 mb-3">
+                                    <button type="submit" class="btn btn-success mr-2">Actualizar Datos</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                    <div class="tab-pane fade" id="seguridad" role="tabpanel" aria-labelledby="seguridad-tab">
+                        <form formGroup="cambioPassword" (ngSubmit)="savePassword()">
+                            <div class="card-body">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="name">Contraseña Actual
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="hidden" class="form-control" id="userId2" name="userId"
+                                                formControlName="userId">
+
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Tu Contraseña Actual" id="userActualPass"
+                                                name="userActualPass" formControlName="userActualPass">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label for="name">Nueva Contraseña
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Tu Nueva Contraseña" id="userPassword"
+                                                name="userPassword" formControlName="userPassword">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Confirmar contraseña
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Nuevamente Tu Contraseña " id="userConfirPassword"
+                                                name="userConfirPassword" formControlName="userConfirPassword">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success mr-2">Actualizar contraseña</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="temaColors" role="tabpanel" aria-labelledby="temaColors-tab">                        
+                        <div class="card-body">
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="switch-block">
+                                        <h4>Logo Header</h4>
+                                        <div class="btnSwitch">
+                                            <button (click)="cambioColorHeader('dark')" type="button" class="changeLogoHeaderColor"
+                                                data-color="dark"></button>
+                                            <button (click)="cambioColorHeader('blue')" type="button" class="selected changeLogoHeaderColor"
+                                                data-color="blue"></button>
+                                            <button (click)="cambioColorHeader('purple')" type="button" class="changeLogoHeaderColor"
+                                                data-color="purple"></button>
+                                            <button (click)="cambioColorHeader('light-blue')" type="button" class="changeLogoHeaderColor"
+                                                data-color="light-blue"></button>
+                                            <button (click)="cambioColorHeader('green')" type="button" class="changeLogoHeaderColor"
+                                                data-color="green"></button>
+                                            <button (click)="cambioColorHeader('orange')" type="button" class="changeLogoHeaderColor"
+                                                data-color="orange"></button>
+                                            <button (click)="cambioColorHeader('red')" type="button" class="changeLogoHeaderColor"
+                                                data-color="red"></button>
+                                            <button (click)="cambioColorHeader('white')" type="button" class="changeLogoHeaderColor"
+                                                data-color="white"></button>
+                                            <br />
+                                            <button (click)="cambioColorHeader('dark2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="dark2"></button>
+                                            <button (click)="cambioColorHeader('blue2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="blue2"></button>
+                                            <button (click)="cambioColorHeader('purple2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="purple2"></button>
+                                            <button (click)="cambioColorHeader('light-blue2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="light-blue2"></button>
+                                            <button (click)="cambioColorHeader('green2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="green2"></button>
+                                            <button (click)="cambioColorHeader('orange2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="orange2"></button>
+                                            <button (click)="cambioColorHeader('red2')" type="button" class="changeLogoHeaderColor"
+                                                data-color="red2"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="switch-block">
+                                        <h4>Navbar Header</h4>
+                                        <div class="btnSwitch">
+                                            <button (click)="cambioColorHeaderT('dark')" type="button" class="changeTopBarColor"
+                                                data-color="dark"></button>
+                                            <button (click)="cambioColorHeaderT('blue')" type="button" class="changeTopBarColor"
+                                                data-color="blue"></button>
+                                            <button (click)="cambioColorHeaderT('purple')" type="button" class="changeTopBarColor"
+                                                data-color="purple"></button>
+                                            <button (click)="cambioColorHeaderT('light-blue')" type="button" class="changeTopBarColor"
+                                                data-color="light-blue"></button>
+                                            <button (click)="cambioColorHeaderT('green')" type="button" class="changeTopBarColor"
+                                                data-color="green"></button>
+                                            <button (click)="cambioColorHeaderT('orange')" type="button" class="changeTopBarColor"
+                                                data-color="orange"></button>
+                                            <button (click)="cambioColorHeaderT('red')" type="button" class="changeTopBarColor"
+                                                data-color="red"></button>
+                                            <button (click)="cambioColorHeaderT('white')" type="button" class="changeTopBarColor"
+                                                data-color="white"></button>
+                                            <br />
+                                            <button (click)="cambioColorHeaderT('dark2')" type="button" class="changeTopBarColor"
+                                                data-color="dark2"></button>
+                                            <button (click)="cambioColorHeaderT('blue2')" type="button" class="selected changeTopBarColor"
+                                                data-color="blue2"></button>
+                                            <button (click)="cambioColorHeaderT('purple2')" type="button" class="changeTopBarColor"
+                                                data-color="purple2"></button>
+                                            <button (click)="cambioColorHeaderT('light-blue2')" type="button" class="changeTopBarColor"
+                                                data-color="light-blue2"></button>
+                                            <button (click)="cambioColorHeaderT('green2')" type="button" class="changeTopBarColor"
+                                                data-color="green2"></button>
+                                            <button (click)="cambioColorHeaderT('orange2')" type="button" class="changeTopBarColor"
+                                                data-color="orange2"></button>
+                                            <button (click)="cambioColorHeaderT('red2')" type="button" class="changeTopBarColor"
+                                                data-color="red2"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="switch-block">
+                                        <h4>Sidebar</h4>
+                                        <div class="btnSwitch">
+                                            <button (click)="cambioSidebar('white')" type="button" class="selected changeSideBarColor"
+                                                data-color="white"></button>
+                                            <button (click)="cambioSidebar('dark')" type="button" class="changeSideBarColor"
+                                                data-color="dark"></button>
+                                            <button (click)="cambioSidebar('dark2')" type="button" class="changeSideBarColor"
+                                                data-color="dark2"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
             </div>
         </div>
-        <div class="switch-block">
-            <h4>Navbar Header</h4>
-            <div class="btnSwitch">
-                <button (click)="cambioColorHeaderT('dark')" type="button" class="changeTopBarColor" data-color="dark"></button>
-                <button (click)="cambioColorHeaderT('blue')" type="button" class="changeTopBarColor" data-color="blue"></button>
-                <button (click)="cambioColorHeaderT('purple')" type="button" class="changeTopBarColor" data-color="purple"></button>
-                <button (click)="cambioColorHeaderT('light-blue')" type="button" class="changeTopBarColor" data-color="light-blue"></button>
-                <button (click)="cambioColorHeaderT('green')" type="button" class="changeTopBarColor" data-color="green"></button>
-                <button (click)="cambioColorHeaderT('orange')" type="button" class="changeTopBarColor" data-color="orange"></button>
-                <button (click)="cambioColorHeaderT('red')" type="button" class="changeTopBarColor" data-color="red"></button>
-                <button (click)="cambioColorHeaderT('white')" type="button" class="changeTopBarColor" data-color="white"></button>
-                <br />
-                <button (click)="cambioColorHeaderT('dark2')" type="button" class="changeTopBarColor" data-color="dark2"></button>
-                <button (click)="cambioColorHeaderT('blue2')" type="button" class="selected changeTopBarColor" data-color="blue2"></button>
-                <button (click)="cambioColorHeaderT('purple2')" type="button" class="changeTopBarColor" data-color="purple2"></button>
-                <button (click)="cambioColorHeaderT('light-blue2')" type="button" class="changeTopBarColor" data-color="light-blue2"></button>
-                <button (click)="cambioColorHeaderT('green2')" type="button" class="changeTopBarColor" data-color="green2"></button>
-                <button (click)="cambioColorHeaderT('orange2')" type="button" class="changeTopBarColor" data-color="orange2"></button>
-                <button (click)="cambioColorHeaderT('red2')" type="button" class="changeTopBarColor" data-color="red2"></button>
-            </div>
-        </div>
-        <div class="switch-block">
-            <h4>Sidebar</h4>
-            <div class="btnSwitch">
-                <button (click)="cambioSidebar('white')" type="button" class="selected changeSideBarColor" data-color="white"></button>
-                <button (click)="cambioSidebar('dark')" type="button" class="changeSideBarColor" data-color="dark"></button>
-                <button (click)="cambioSidebar('dark2')" type="button" class="changeSideBarColor" data-color="dark2"></button>
-            </div>
-        </div>
-        <div class="switch-block">
-            <h4>Background</h4>
-            <div class="btnSwitch">
-                <button (click)="cambioBody('bg2')" type="button" class="changeBackgroundColor" data-color="bg2"></button>
-                <button (click)="cambioBody('bg1')" type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
-                <button (click)="cambioBody('bg3')" type="button" class="changeBackgroundColor" data-color="bg3"></button>
-                <button (click)="cambioBody('dark')" type="button" class="changeBackgroundColor" data-color="dark"></button>
+
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-header" style="background-image: url('https://via.placeholder.com/150')">
+                    <div class="profile-picture">
+                        <div class="avatar avatar-xl">
+                            <img src="https://via.placeholder.com/50" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name">Hizrian, 19</div>
+                        <div class="job">Frontend Developer</div>
+                        <div class="desc">A man who hates loneliness</div>
+                        
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- End Custom template -->
+
+
+<!-- <div class="accordion accordion-secondary">
+    <div class="card">
+        <div class="card-header collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo" role="button">
+            <div class="span-icon">
+                <div class="flaticon-box-1"></div>
+            </div>
+            <div class="span-title">
+                Lorem Ipsum #2
+            </div>
+            <div class="span-mode"></div>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod
+                high life accusamus terry richardson ad squid. 3
+                wolf moon officia aute, non cupidatat skateboard
+                dolor brunch. Food truck quinoa nesciunt laborum
+                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put
+                a bird on it squid single-origin coffee nulla
+                assumenda shoreditch et. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred
+                nesciunt sapiente ea proident. Ad vegan excepteur
+                butcher vice lomo. Leggings occaecat craft beer
+                farm-to-table, raw denim aesthetic synth nesciunt
+                you probably haven't heard of them accusamus labore
+                sustainable VHS.
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree"
+            aria-expanded="false" aria-controls="collapseThree" role="button">
+            <div class="span-icon">
+                <div class="flaticon-box-1"></div>
+            </div>
+            <div class="span-title">
+                Lorem Ipsum #3
+            </div>
+            <div class="span-mode"></div>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod
+                high life accusamus terry richardson ad squid. 3
+                wolf moon officia aute, non cupidatat skateboard
+                dolor brunch. Food truck quinoa nesciunt laborum
+                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put
+                a bird on it squid single-origin coffee nulla
+                assumenda shoreditch et. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred
+                nesciunt sapiente ea proident. Ad vegan excepteur
+                butcher vice lomo. Leggings occaecat craft beer
+                farm-to-table, raw denim aesthetic synth nesciunt
+                you probably haven't heard of them accusamus labore
+                sustainable VHS.
+            </div>
+        </div>
+    </div>
+
+</div> -->
+

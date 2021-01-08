@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { EntrenamientoComponent } from './entrenamiento/entrenamiento.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { EntrenamientosComponent } from './entrenamientos/entrenamientos.component';
+import { PacienteComponent } from './paciente/paciente.component';
+import { PacientesComponent } from './pacientes/pacientes.component';
 
 
 
@@ -22,6 +25,9 @@ import { PerfilComponent } from './perfil/perfil.component';
     UsuarioComponent,
     EntrenamientoComponent,
     PerfilComponent,
+    EntrenamientosComponent,
+    PacienteComponent,
+    PacientesComponent,
     
   ],
   exports:[

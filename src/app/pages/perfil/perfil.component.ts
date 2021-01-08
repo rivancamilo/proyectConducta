@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-perfil',
@@ -13,7 +14,8 @@ export class PerfilComponent implements OnInit {
 	public headerTop = document.querySelector('.navbar');
 	public sidebar = document.querySelector('.sidebar');
 	public body = document.querySelector('#colorBody');
-
+	perfilUsuario:FormGroup;
+	cambioPassword:FormGroup;  
 	constructor() { }
 
 	ngOnInit(): void {
@@ -35,4 +37,10 @@ export class PerfilComponent implements OnInit {
 		this.body.setAttribute('data-background-color', color);
 	}
 
+	savePassword(){
+
+	}
+	actualizaPerfil(){
+		
+	}
 }
