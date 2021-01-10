@@ -7,7 +7,6 @@ const UsuarioSchema = Schema({
     userPassword:   { type: String,     required:true },
     userEstado:     { type: Boolean,    required:true },
     userRolID :     { type: String },
-    userLastDate:   { type: String,     required:true },
     userDateAdd:    { type: String,     required:true },
     userContacto:   { type: String },
     userSobreMi:    { type: String },
@@ -21,13 +20,15 @@ para el obteto que retornamos pero aun asi sigue guardado en
 la base de datos todo esot con fines de seguridad  
 
 ****************************************************************************************/
-/* UsuarioSchema.methods.toJSON = function(){
+UsuarioSchema.methods.toJSON = function(){
     let user = this;
     let userObject = user.toObject();
     delete userObject.userPassword;
     return userObject;
-} */
+}
+    
+
 
 
 /* exportamos el modulo  */
-module.exports = mongoose.model('Usuarios', UsuarioSchema);
+module.exports = model('Usuarios', UsuarioSchema);
