@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Usuario = require('../models/usuario.model');
-const bcryptjs =  require('bcryptjs')
+const bcryptjs =  require('bcryptjs');
+const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req,res)=>{
     
@@ -8,13 +9,13 @@ const getUsuarios = async (req,res)=>{
 
     res.json({
         ok:true,
-        usuario
+        usuario,
+        id:req.idUserToken // id del usuario que hizo la peticion
     })
-
 
 }
 
-const crearUsuario = async (req,res = response )=>{
+const crearUsuario = async (req,res = response ) =>{
     
     const { userNombres,
             userApellidos,
@@ -26,6 +27,8 @@ const crearUsuario = async (req,res = response )=>{
             userContacto,
             userSobreMi,
             userAvatar } = req.body;
+
+        
 
     try {
 
@@ -45,17 +48,22 @@ const crearUsuario = async (req,res = response )=>{
         encriptamos la contraseña en una sola via
         **************************************************************************/
         const salt = bcryptjs.genSaltSync();//generamos una cadena aleatoria
-        usuario.userPassword = bcryptjs.hashSync(userPassword,salt )
+        usuario.userPassword = bcryptjs.hashSync( userPassword,salt )
 
         /**************************************************************************
         guardamos el usuario
         **************************************************************************/
         await usuario.save();
-
+        
+        /*******************************************************************************
+        Generamos el token
+        *******************************************************************************/
+        const token = await generarJWT( usuario._id )
 
         res.json({
             ok:true,
-            usuario
+            usuario,
+            token
         })
 
     } catch (error) {
@@ -66,11 +74,7 @@ const crearUsuario = async (req,res = response )=>{
             msg:'error inesperado, revisar los logs'
         })
 
-    }
-
-
-    
-    
+    }  
 
 }
 
@@ -78,7 +82,6 @@ const crearUsuario = async (req,res = response )=>{
 const updateUsuario = async (req, res = response ) => {
 
     const idUser = req.params.id;
-
     try {
         
         const usuarioDB = await Usuario.findById(idUser)
