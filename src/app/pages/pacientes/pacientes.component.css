@@ -1,0 +1,10 @@
+.list-btns-acciones {
+    align-self: start;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #a9acb0; 
+}
+.list-btns-acciones {
+    padding: .75rem 1rem; 
+}
