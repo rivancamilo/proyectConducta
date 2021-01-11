@@ -3,13 +3,26 @@ const Usuario = require('../models/usuario.model');
 const bcryptjs =  require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
 
-const getUsuarios = async (req,res)=>{
+const getUsuarios = async (req,res = response)=>{
     
-    const usuario = await Usuario.find();
+    const desde = Number(req.query.desde) || 0 ;
+
+    //ejecutamos ambas consultas al mismo tiempo
+    const [usuario, total ] = await Promise.all([
+        Usuario
+                .find({})
+                .skip(desde)
+                .limit(5),
+
+        Usuario.count()
+
+    ])
+   
 
     res.json({
         ok:true,
         usuario,
+        total,
         id:req.idUserToken // id del usuario que hizo la peticion
     })
 
