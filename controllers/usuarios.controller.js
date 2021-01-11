@@ -14,7 +14,7 @@ const getUsuarios = async (req,res = response)=>{
                 .skip(desde)
                 .limit(5),
 
-        Usuario.count()
+        Usuario.countDocuments()
 
     ])
    
