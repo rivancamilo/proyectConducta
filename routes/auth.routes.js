@@ -1,9 +1,15 @@
+/*
+    /api/login
+*/
+
 const { Router } = require('express')
 const { check } = require('express-validator');
 
 const router = Router();
-const { login } = require('../controllers/auth.controller');
+const { login, renewToken } = require('../controllers/auth.controller');
 const { validaCampo } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
+
 
 router.post('/', 
             [
@@ -12,6 +18,8 @@ router.post('/',
                 validaCampo
             ]
             ,login )
+
+router.get('/renewtoken', validarJWT , renewToken )
 
 
 
