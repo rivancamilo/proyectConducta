@@ -9,6 +9,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EntrenamientosComponent } from './entrenamientos/entrenamientos.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: PagesComponent,
+        canActivate: [AuthGuard],
         children: [
 
             { path: '', component: DashboardComponent },
