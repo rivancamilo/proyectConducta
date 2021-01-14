@@ -7,34 +7,45 @@
         </div>
         <div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
             <div class="container container-login container-transparent animated fadeIn">
-                <h3 class="text-center">Sign In To Admin</h3>
-                <div class="login-form">
-                    <div class="form-group">
-                        <label for="username" class="placeholder"><b>Username</b></label>
-                        <input id="username" name="username" type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="placeholder"><b>Password</b></label>
-                        <a href="#" class="link float-right">Forget Password ?</a>
-                        <div class="position-relative">
-                            <input id="password" name="password" type="password" class="form-control" required>
-                            <div class="show-password">
-                                <i class="icon-eye"></i>
+                <h3 class="text-center">Iniciar Sesión</h3>
+                <form [formGroup]="loginUser" (ngSubmit)="iniciarSesion()">
+                    <div class="login-form">
+                        <div class="form-group">
+                            <label for="userEmail" class="placeholder"><b>Username</b></label>
+                            <input  class="form-control" type="email"
+                                    id="userEmail" name="userEmail" 
+                                    formControlName="userEmail">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userPassword" class="placeholder"><b>Password</b></label>
+                            <a (click)="recoverPass()" class="link float-right cursorPointer">Olvidaste tu Contraseña?</a>
+                            <div class="position-relative">
+                                <input  type="password" class="form-control"
+                                        id="userPassword" name="userPassword"  
+                                        formControlName="userPassword" >
+                                <div class="show-password">
+                                    <i class="icon-eye"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group form-action-d-flex mb-3">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="rememberme">
-                            <label class="custom-control-label m-0" for="rememberme">Remember Me</label>
+
+                        <div class="form-group form-action-d-flex mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <input  type="checkbox" class="custom-control-input" 
+                                        id="userSaveDatos" name="userSaveDatos"
+                                        formControlName="userSaveDatos">
+                                <label class="custom-control-label m-0" for="userSaveDatos">Recordar Datos</label>
+                            </div>
+                            <button class="btn btn-secondary col-md-5 float-right mt-3 mt-sm-0 fw-bold" 
+                                    type="submit">
+                                    Iniciar Sesión
+                            </button>
                         </div>
-                        <a href="#" class="btn btn-secondary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Sign In</a>
+                        
                     </div>
-                    <div class="login-account">
-                        <span class="msg">Don't have an account yet ?</span>
-                        <a href="#" id="show-signup" class="link">Sign Up</a>
-                    </div>
-                </div>
+                </form>
+                
             </div>
         </div>
     </div>
