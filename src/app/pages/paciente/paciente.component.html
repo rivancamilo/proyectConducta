@@ -1,99 +1,114 @@
 <div class="row">
     <div class="wizard-container wizard-round col-md-9">
 
-        <form formGroup="nuevoUsuario" (ngSubmit)="crearUsuario()">
+        <form [formGroup]="nuevoPaciente" (ngSubmit)="crearPaciente()">
 
             <div class="wizard-body">
                 <div class="row">
+
                     <div class="col-md-6">
                         <!-- ingresar nombres -->
-                        <div class="form-group">
+                        <div class="form-group"  [class.has-error]="pacienteNombresNoValid" [class.has-success]="pacienteNombresValid">
                             <label for="name">Nombres
                                 <span class="required-label">*</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                name="userNombres" formControlName="userNombres">
+                            <input type="text" class="form-control" placeholder="Escribe el nombre del paciente" id="pacienteNombres"
+                                name="pacienteNombres" formControlName="pacienteNombres">
                         </div>
 
-                        <!-- ingresar nombres -->
-                        <div class="form-group ">
+                        <!-- ingresar tipo y numero de ID -->
+                        <div class="form-group">
                             <label for="name">Numero de identificacion
                                 <span class="required-label">*</span>
                             </label>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="select2-input ">
-                                        <select class="form-control " 
-                                                id="userRolID" name="userRolID"  
-                                                formControlName="userRolID" >
+                                        <select class="form-control" 
+                                                id="pacienteTipoID" name="pacienteTipoID"  
+                                                formControlName="pacienteTipoID" >
                                             <option value="rol._id" >CC</option>                                                                                
                                             <option value="rol._id" >CC</option>                                                                                
                                             <option value="rol._id" >CC</option>                                                                                
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-9">
-                                    <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                        name="userNombres" formControlName="userNombres">
+                                <div class="col-8">
+                                    <input  type="text" class="form-control" 
+                                            placeholder="Escribe tu nombre" id="pacienteNumID"
+                                            name="pacienteNumID" formControlName="pacienteNumID">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- ingresar el nombre de la ciudad -->
+                        <div class="form-group"  [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
                             <label for="name">Ciudad
                                 <span class="required-label">*</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                name="userNombres" formControlName="userNombres">
+                            <input  type="text" class="form-control" 
+                                    placeholder="Escribe tu nombre" id="pacienteCiudad"
+                                    name="pacienteCiudad" formControlName="pacienteCiudad">
                         </div>
                         
+                        <!-- subir foto del paciente -->
                         <div class="form-group">
-                            <label>Foto <span class="required-label">*</span></label>
+                            <label>Foto del Paciente <span class="required-label">*</span></label>
                             
                             <div class="input-file input-file-image">
-                                    <img class="img-upload-preview img-circle" width="100" height="100" src="http://placehold.it/100x100" alt="preview">
-                                    <input type="file" class="form-control form-control-file" id="uploadImg" name="uploadImg" accept="image/*" required >
+                                    <img    class="img-upload-preview img-circle" width="100" height="100" 
+                                            src="http://placehold.it/100x100" alt="preview">
+                                    <input  type="file" class="form-control form-control-file" 
+                                            id="uploadImg" name="uploadImg" accept="image/*">
                                     <label for="uploadImg" class="btn btn-primary btn-round btn-lg">
                                         <i class="fa fa-file-image"></i> 
                                         Subir Foto
                                     </label>
                                 </div>
-                            
                         </div>
 
                     </div>
+                    
                     <div class="col-md-6">
-                        <!-- ingresar nombres -->
-                        <div class="form-group">
+                        <!-- ingresar apellidos -->
+                        <div class="form-group" [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
                             <label for="name">Apellidos
                                 <span class="required-label">*</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                name="userNombres" formControlName="userNombres">
+                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteApellidos"
+                                name="pacienteApellidos" formControlName="pacienteApellidos">
                         </div>
-                        <div class="form-group">
+
+
+                        <!-- ingresar fecha de nacimiento -->
+                        <div class="form-group" [class.has-error]="pacienteDateNaciNoValid" [class.has-success]="pacienteDateNaciValid">
                             <label>Fecha de Nacimiento</label>
                             <div class="input-group">
-                                <input type="date" class="form-control" id="datepicker" name="datepicker">
+                                <input  type="date" class="form-control" 
+                                        id="pacienteDateNaci" name="pacienteDateNaci"
+                                        formControlName="pacienteDateNaci">
                             </div>
                         </div>
-                        <div class="form-group">
+
+                        <!-- ingresar direccion -->
+                        <div class="form-group" [class.has-error]="pacienteDireccionNoValid" [class.has-success]="pacienteDireccionValid">
                             <label for="name">Dirección de Residencia
                                 <span class="required-label">*</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                name="userNombres" formControlName="userNombres">
+                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteDireccion"
+                                name="pacienteDireccion" formControlName="pacienteDireccion">
                         </div>
-                        <div class="form-group">
+
+                        <!-- ingresar EPS -->
+                        <div class="form-group" [class.has-error]="pacienteEPSNoValid" [class.has-success]="pacienteEPSValid">
                             <label for="name">EPS
                                 <span class="required-label">*</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="userNombres"
-                                name="userNombres" formControlName="userNombres">
+                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteEPS"
+                                        name="pacienteEPS" formControlName="pacienteEPS">
                         </div>
 
                     </div>
-
 
 
                 </div>
