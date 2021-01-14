@@ -13,6 +13,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EntrenamientosComponent } from './entrenamientos/entrenamientos.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -42,7 +44,9 @@ import { PacientesComponent } from './pacientes/pacientes.component';
     CommonModule,
     SharedModule,
     RouterModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class PagesModule { }
