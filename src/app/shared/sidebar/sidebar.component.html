@@ -4,12 +4,12 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="http://via.placeholder.com/50" alt="..." class="avatar-img rounded-circle">
+                    <img [src]="usuario.getImagen" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Hizrian
+                            {{ usuario.userNombres }}
                             <span class="user-level">Administrator</span>
                             <span class="caret"></span>
                         </span>
