@@ -10,14 +10,15 @@
                 <h3 class="text-center">Iniciar Sesión</h3>
                 <form [formGroup]="loginUser" (ngSubmit)="iniciarSesion()">
                     <div class="login-form">
-                        <div class="form-group">
+                        
+                        <div class="form-group" [class.has-error]="userEmailNoValid" [class.has-success]="userEmailValid">
                             <label for="userEmail" class="placeholder"><b>Username</b></label>
                             <input  class="form-control" type="email"
                                     id="userEmail" name="userEmail" 
                                     formControlName="userEmail">
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" [class.has-error]="userPasswordNoValid" [class.has-success]="userPasswordValid">
                             <label for="userPassword" class="placeholder"><b>Password</b></label>
                             <a (click)="recoverPass()" class="link float-right cursorPointer">Olvidaste tu Contraseña?</a>
                             <div class="position-relative">

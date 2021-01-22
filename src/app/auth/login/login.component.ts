@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2'
 
 @Component({
 	selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
 	crearFormulario() {
 		this.loginUser = this.fb.group({
-			userEmail:[ localStorage.getItem('email') || 'fernanda@email.com', [ Validators.required ]],
+			userEmail:[ localStorage.getItem('email') || 'mariag@email.com', [ Validators.required ]],
 			userPassword:['123456', [ Validators.required ]],
 			userSaveDatos:[  false ]
 		})
@@ -34,7 +35,6 @@ export class LoginComponent implements OnInit {
 
 	iniciarSesion(){
 
-		console.log(this.loginUser.value)
 		this.userService.login(this.loginUser.value).subscribe(res => {
 
 			if(this.loginUser.get('userSaveDatos').value){
@@ -45,9 +45,16 @@ export class LoginComponent implements OnInit {
 			
 			this.router.navigateByUrl('/');
 
+
 		},err  =>{
 
-			console.log(err)
+			console.log(err.error.msg)
+			Swal.fire(
+				'Error',
+				err.error.msg,
+				'error'
+			)
+
 		})
 
 	}
@@ -55,5 +62,23 @@ export class LoginComponent implements OnInit {
 	recoverPass() {
 		this.router.navigateByUrl('recoverpass');
 	}
+
+	/**************************************************************************************
+	  agregamos get's para las validaciones de los input
+	**************************************************************************************/
+	get userEmailNoValid() {
+		return this.loginUser.get('userEmail').invalid && this.loginUser.get('userEmail').touched;
+	}
+	get userEmailValid() {
+		return this.loginUser.get('userEmail').valid && this.loginUser.get('userEmail').touched;
+	}
+
+	get userPasswordNoValid() {
+		return this.loginUser.get('userPassword').invalid && this.loginUser.get('userPassword').touched;
+	}
+	get userPasswordValid() {
+		return this.loginUser.get('userPassword').valid && this.loginUser.get('userPassword').touched;
+	}
+
 
 }
