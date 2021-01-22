@@ -14,7 +14,9 @@ export class AuthGuard implements CanActivate {
 	) {
 
 	}
-
+	/****************************************************************************
+		Validamos que el usuario este autenticado
+	****************************************************************************/
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot) {
