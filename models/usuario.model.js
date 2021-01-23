@@ -5,9 +5,9 @@ const UsuarioSchema = Schema({
     userApellidos:  { type: String,     required:true },
     userEmail:      { type: String,     required:true,  unique:true },
     userPassword:   { type: String,     required:true },
-    userEstado:     { type: Boolean,    required:true },
+    userEstado:     { type: String,     required:true },
     userRolID :     { type: String },
-    userDateAdd:    { type: String,     required:true },
+    userDateAdd:    { type: String},
     userContacto:   { type: String },
     userSobreMi:    { type: String },
     userAvatar:     { type: String },
@@ -24,6 +24,7 @@ UsuarioSchema.methods.toJSON = function(){
     let user = this;
     let userObject = user.toObject();
     delete userObject.userPassword;
+    delete userObject.__v;
     return userObject;
 }
     

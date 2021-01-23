@@ -6,7 +6,7 @@ const { validaCampo } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-JWT');
 
 router.get('/', validarJWT ,getUsuarios )
-router.post('/', 
+/* router.post('/', 
             [ 
                 validarJWT,//validamos el token
                 check('userNombres', 'El nombre es obligatorio').not().isEmpty(),
@@ -14,7 +14,9 @@ router.post('/',
                 check('userEmail','el Email no es valido').isEmail(),
                 check('userPassword', 'El password es obligatorio').not().isEmpty(),
                 validaCampo
-            ] , crearUsuario );
+            ] , crearUsuario ); */
+
+router.post('/', crearUsuario );
         
 router.put('/:id',validarJWT, updateUsuario )
 

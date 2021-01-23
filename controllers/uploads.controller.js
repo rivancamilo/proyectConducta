@@ -44,6 +44,7 @@ const fileUpload = (req, res = response ) => {
 
     // movemos la imagen
     file.mv( path , (err) => {
+        
         if (err){
             return res.status(500).json({
                 ok:false,
@@ -58,8 +59,10 @@ const fileUpload = (req, res = response ) => {
 
         res.json({
             ok:true,
-            msg:`archivo subido ${nomArchivo}`
+            msg:`archivo subido`,
+            nombreArchivo: nomArchivo
         })
+        
     });
 
 }
@@ -68,7 +71,7 @@ const fileUpload = (req, res = response ) => {
 const retornaAvatar = (req, res = response) => {
 
     const tabla = req.params.tabla
-    const foto = req.params.tabla;
+    const foto = req.params.foto;
 
     const pathImagen = path.join(__dirname, `../uploads/${tabla}/${foto}`);
     //imagen por defecto

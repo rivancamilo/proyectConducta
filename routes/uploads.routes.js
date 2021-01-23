@@ -7,7 +7,7 @@ const expressfileUpload = require('express-fileupload');
 router.use(expressfileUpload());
  
 router.put('/:tabla/:id', fileUpload )
-router.get('/:tabla/:avatar', retornaAvatar )
+router.get('/:tabla/:foto', retornaAvatar )
 
 
 module.exports = router

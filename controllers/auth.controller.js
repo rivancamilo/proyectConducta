@@ -61,6 +61,10 @@ const login = async (req, res=  response ) =>{
 const renewToken = async (req , res = response) =>  {
 
     const idUser = req.idUserToken;
+
+    const usuario = await Usuario.findById(idUser);
+
+
     /*******************************************************************************
     Generamos el token
     *******************************************************************************/
@@ -68,7 +72,8 @@ const renewToken = async (req , res = response) =>  {
 
     res.json({
         ok:true,
-        token
+        token,
+        usuario
     })
 
 }
