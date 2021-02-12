@@ -2,13 +2,13 @@
 <div class="row">
     <div class="wizard-container wizard-round col-md-9">
 
-        <form [formGroup]="nuevoUsuario" (ngSubmit)="crearUsuario()">
+        <form [formGroup]="nuevoUsuario" (ngSubmit)="guardarUsuario()">
 
             <div class="wizard-body">
                 <div class="row">
 
+                    <!-- ingresar nombres -->
                     <div class="col-md-6">
-                        <!-- ingresar nombres -->
                         <div class="form-group" [class.has-error]="userNombresNoValid" [class.has-success]="userNombresValid">
                             <label for="name">Nombres 
                                 <span class="required-label">*</span>
@@ -18,8 +18,21 @@
                                     id="userNombres" name="userNombres" 
                                     formControlName="userNombres">
                         </div>
+                    </div>
+                    <!-- ingresar apellido -->
+                    <div class="col-md-6">
+                        <div class="form-group" [class.has-error]="userApellidosNoValid" [class.has-success]="userApellidosValid">
+                            <label for="name">Apellidos 
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="text" class="form-control" placeholder="Escribe tus apellidos" 
+                                    id="userApellidos" name="userApellidos" 
+                                    formControlName="userApellidos">
+                        </div>
+                    </div>
 
-                        <!-- ingresar email -->
+                    <!-- ingresar email -->
+                    <div class="col-md-6">
                         <div class="form-group" [class.has-error]="userEmailNoValid" [class.has-success]="userEmailValid">
                             <label for="email">Correo Electronico
                                 <span class="required-label">*</span>
@@ -32,8 +45,27 @@
                                 We'll never share your email with anyone else.
                             </small>
                         </div>
+                    </div>
 
-                        <!-- ingresar contraseña  -->
+                    <!-- seleccionar rol -->
+                    <div class="col-md-6">
+                        <div class="form-group"  [class.has-error]="userRolIDNoValid" [class.has-success]="userRolIDValid">
+                            <label for="userRolID" >Seleccionar Rol de Usuario 
+                                <span class="required-label">*</span>
+                            </label>
+                            <div class="select2-input">
+                                <select class="form-control" 
+                                        id="userRolID" name="userRolID"  
+                                        formControlName="userRolID" >
+                                    <option value="admin" >Admin</option>
+                                    <option value="user" >Usuario</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <!-- ingresar contraseña  -->
+                    <div class="col-md-6">
                         <div  class="form-group" [class.has-error]="userPasswordNoValid" [class.has-success]="userPasswordValid">
                             <label for="userPassword" >Contraseña 
                                 <span class="required-label">*</span>
@@ -43,52 +75,11 @@
                                     id="userPassword" name="userPassword" 
                                     formControlName="userPassword">
                         </div>
-                        
-                        
-                        <!-- subir avatar -->
-                        <div class="form-group">
-                            <label>
-                                <i class="fas fa-cloud-upload-alt"></i> Subir Avatar :
-                            </label>
-                            <div class="input-file input-file-image">
-                                <input  type="hidden" class="form-control" 
-                                    id="userAvatar" name="userAvatar" 
-                                    formControlName="userAvatar">
-                                <img class="img-upload-preview img-circle" width="100" height="100" src="https://via.placeholder.com/50" alt="preview">
-                                
-                            </div>
-                        </div>
-
                     </div>
-
-
+                    
+                    <!-- confirmar Contraseña -->
                     <div class="col-md-6">
-                        <!-- ingresar apellido -->
-                        <div class="form-group" [class.has-error]="userApellidosNoValid" [class.has-success]="userApellidosValid">
-                            <label for="name">Apellidos 
-                                <span class="required-label">*</span>
-                            </label>
-                            <input  type="text" class="form-control" placeholder="Escribe tus apellidos" 
-                                    id="userApellidos" name="userApellidos" 
-                                    formControlName="userApellidos">
-                        </div>
-
-                        <!-- seleccionar rol -->
-                        <div class="form-group"  [class.has-error]="userRolIDNoValid" [class.has-success]="userRolIDValid">
-                            <label for="userRolID" >Seleccionar Rol de Usuario 
-                                <span class="required-label">*</span>
-                            </label>
-                            <div class="select2-input">
-                                <select class="form-control" 
-                                        id="userRolID" name="userRolID"  
-                                        formControlName="userRolID" >
-                                    <option value="rol._id" > rol.nomRol </option>                                                                                
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- confirmar Contraseña -->
-                        <div  class="form-group" [class.has-error]="userConfirPasswordNoValid" [class.has-success]="userConfirPasswordValid">
+                        <div  class="form-group" [class.has-error]="userConfirPasswordNoValid">
                             <label for="confirmpassword" >Confirmar Contraseña 
                                 <span class="required-label">*</span>
                             </label>
@@ -97,8 +88,35 @@
                                     id="confirmpassword" name="confirmpassword" 
                                     formControlName="userConfirPassword">
                         </div>
+                    </div>
 
-                        <!-- selecionar estado [class.has-success]="userApellidosValid" -->
+                    <!-- subir avatar -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-file input-file-image">
+
+                                <img    class="img-upload-preview img-circle" width="100" height="100"
+                                        [src]="imageTemp" alt="preview"
+                                        *ngIf="imageTemp">
+
+                                <img    class="img-upload-preview img-circle" width="100" height="100"
+                                        src="assets/img/no-image.jpg" alt="preview"
+                                        *ngIf="!imageTemp">
+
+                                <input  type="file" class="form-control form-control-file"
+                                        id="fotoUser" name="fotoUser" accept="image/*" 
+                                        (change)="cambiarImagen($event.target.files[0])">
+
+                                <label for="fotoUser" class="btn btn-primary btn-round btn-lg">
+                                    <i class="fa fa-file-image"></i> 
+                                    Subir Foto
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- selecionar estado [class.has-success]="userApellidosValid" -->
+                    <div class="col-md-6">
                         <div class="form-group" [class.has-success]="userEstadoValid" >
                             <label>Estado 
                                 <span class="required-label">*</span>
@@ -119,9 +137,7 @@
                                     <label class="custom-control-label" for="inactivo">Inactivo</label>
                                 </div>
                             </div>
-                        </div>
-                        
-                        
+                        </div>                    
                     </div>
 
                 </div>
@@ -129,13 +145,12 @@
 
             <div class="wizard-action">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-next btn-danger">
+                    <button type="submit" class="btn btn-next btn-danger" >
                         <i class="fas fa-save "></i> Guardar
                     </button>
                 </div>
                 <div class="clearfix"></div>
             </div>
-
             
         </form> 
     </div>

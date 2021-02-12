@@ -1,0 +1,150 @@
+
+
+<div class="tab-pane fade" id="temaColors" role="tabpanel" aria-labelledby="temaColors-tab">                        
+    <div class="card-body">
+        <div class="row">
+            <div class="row gutters-xs">
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="dark" class="colorinput-input">
+                        <span class="colorinput-color bg-black"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="primary" class="colorinput-input">
+                        <span class="colorinput-color bg-primary"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="secondary" class="colorinput-input">
+                        <span class="colorinput-color bg-secondary"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="info" class="colorinput-input">
+                        <span class="colorinput-color bg-info"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="success" class="colorinput-input">
+                        <span class="colorinput-color bg-success"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="danger" class="colorinput-input">
+                        <span class="colorinput-color bg-danger"></span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="colorinput">
+                        <input name="color" type="checkbox" value="warning" class="colorinput-input">
+                        <span class="colorinput-color bg-warning"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="switch-block">
+                    <h4>Logo Header</h4>
+                    <div class="btnSwitch">
+                        <button (click)="cambioColorHeader('dark')" type="button" class="changeLogoHeaderColor"
+                            data-color="dark"></button>
+                        <button (click)="cambioColorHeader('blue')" type="button" class="selected changeLogoHeaderColor"
+                            data-color="blue"></button>
+                        <button (click)="cambioColorHeader('purple')" type="button" class="changeLogoHeaderColor"
+                            data-color="purple"></button>
+                        <button (click)="cambioColorHeader('light-blue')" type="button" class="changeLogoHeaderColor"
+                            data-color="light-blue"></button>
+                        <button (click)="cambioColorHeader('green')" type="button" class="changeLogoHeaderColor"
+                            data-color="green"></button>
+                        <button (click)="cambioColorHeader('orange')" type="button" class="changeLogoHeaderColor"
+                            data-color="orange"></button>
+                        <button (click)="cambioColorHeader('red')" type="button" class="changeLogoHeaderColor"
+                            data-color="red"></button>
+                        <button (click)="cambioColorHeader('white')" type="button" class="changeLogoHeaderColor"
+                            data-color="white"></button>
+                        <br />
+                        <button (click)="cambioColorHeader('dark2')" type="button" class="changeLogoHeaderColor"
+                            data-color="dark2"></button>
+                        <button (click)="cambioColorHeader('blue2')" type="button" class="changeLogoHeaderColor"
+                            data-color="blue2"></button>
+                        <button (click)="cambioColorHeader('purple2')" type="button" class="changeLogoHeaderColor"
+                            data-color="purple2"></button>
+                        <button (click)="cambioColorHeader('light-blue2')" type="button" class="changeLogoHeaderColor"
+                            data-color="light-blue2"></button>
+                        <button (click)="cambioColorHeader('green2')" type="button" class="changeLogoHeaderColor"
+                            data-color="green2"></button>
+                        <button (click)="cambioColorHeader('orange2')" type="button" class="changeLogoHeaderColor"
+                            data-color="orange2"></button>
+                        <button (click)="cambioColorHeader('red2')" type="button" class="changeLogoHeaderColor"
+                            data-color="red2"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="switch-block">
+                    <h4>Navbar Header</h4>
+                    <div class="btnSwitch">
+                        <button (click)="cambioColorHeaderT('dark')" type="button" class="changeTopBarColor"
+                            data-color="dark"></button>
+                        <button (click)="cambioColorHeaderT('blue')" type="button" class="changeTopBarColor"
+                            data-color="blue"></button>
+                        <button (click)="cambioColorHeaderT('purple')" type="button" class="changeTopBarColor"
+                            data-color="purple"></button>
+                        <button (click)="cambioColorHeaderT('light-blue')" type="button" class="changeTopBarColor"
+                            data-color="light-blue"></button>
+                        <button (click)="cambioColorHeaderT('green')" type="button" class="changeTopBarColor"
+                            data-color="green"></button>
+                        <button (click)="cambioColorHeaderT('orange')" type="button" class="changeTopBarColor"
+                            data-color="orange"></button>
+                        <button (click)="cambioColorHeaderT('red')" type="button" class="changeTopBarColor"
+                            data-color="red"></button>
+                        <button (click)="cambioColorHeaderT('white')" type="button" class="changeTopBarColor"
+                            data-color="white"></button>
+                        <br />
+                        <button (click)="cambioColorHeaderT('dark2')" type="button" class="changeTopBarColor"
+                            data-color="dark2"></button>
+                        <button (click)="cambioColorHeaderT('blue2')" type="button" class="selected changeTopBarColor"
+                            data-color="blue2"></button>
+                        <button (click)="cambioColorHeaderT('purple2')" type="button" class="changeTopBarColor"
+                            data-color="purple2"></button>
+                        <button (click)="cambioColorHeaderT('light-blue2')" type="button" class="changeTopBarColor"
+                            data-color="light-blue2"></button>
+                        <button (click)="cambioColorHeaderT('green2')" type="button" class="changeTopBarColor"
+                            data-color="green2"></button>
+                        <button (click)="cambioColorHeaderT('orange2')" type="button" class="changeTopBarColor"
+                            data-color="orange2"></button>
+                        <button (click)="cambioColorHeaderT('red2')" type="button" class="changeTopBarColor"
+                            data-color="red2"></button>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="switch-block">
+                    <h4>Sidebar</h4>
+                    <div class="btnSwitch">
+                        <button (click)="cambioSidebar('white')" type="button" class="selected changeSideBarColor"
+                            data-color="white"></button>
+                        <button (click)="cambioSidebar('dark')" type="button" class="changeSideBarColor"
+                            data-color="dark"></button>
+                        <button (click)="cambioSidebar('dark2')" type="button" class="changeSideBarColor"
+                            data-color="dark2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

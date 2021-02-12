@@ -16,7 +16,9 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     ChartsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ]
 })
 export class PagesModule { }

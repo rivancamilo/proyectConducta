@@ -30,12 +30,15 @@
                 </div>
 
                 <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                    <!-- actualizar datos del usuario -->
+
                     <div class="tab-pane fade show active" id="datos" role="tabpanel" aria-labelledby="datos-tab">
                         <form [formGroup]="perfilUsuario" (ngSubmit)="actualizaPerfil()">
                             <div class="card-body">
+
                                 <div class="row mt-3">
+                                    <!-- nombre del usuario -->
                                     <div class="col-md-6">
-                                        <!-- nombre del usuario -->
                                         <div class="form-group">
                                             <label for="name">Nombre
                                                 <span class="required-label">*</span>
@@ -45,8 +48,8 @@
                                                 id="userNombres" name="userNombres" formControlName="userNombres">
                                         </div>
                                     </div>
+                                    <!-- apellidos del usuario -->
                                     <div class="col-md-6">
-                                        <!-- apellidos del usuario -->
                                         <div class="form-group">
                                             <label for="name">Apellidos
                                                 <span class="required-label">*</span>
@@ -55,11 +58,9 @@
                                                 id="userApellidos" name="userApellidos" formControlName="userApellidos">
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row mt-3">
+                                    <!-- corre electronico del usuario -->
                                     <div class="col-md-6">
-                                        <!-- corre electronico del usuario -->
                                         <div class="form-group">
                                             <label for="name">Email
                                                 <span class="required-label">*</span>
@@ -68,8 +69,8 @@
                                                     id="userEmail" name="userEmail" formControlName="userEmail" >
                                         </div>
                                     </div>
+                                    <!-- numero de contacto del usuario -->
                                     <div class="col-md-6">
-                                        <!-- numero de contacto del usuario -->
                                         <div class="form-group">
                                             <label for="name">Numero de Contacto
                                                 <span class="required-label">*</span>
@@ -79,11 +80,9 @@
                                                 name="userContacto" formControlName="userContacto">
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row mt-3">
+                                    <!-- avatar o foto del usuario -->
                                     <div class="col-md-4">
-                                        <!-- avatar o foto del usuario -->
                                         <div class="form-group">
                                             <div class="input-file input-file-image">
 
@@ -95,24 +94,20 @@
                                                         *ngIf="imageTemp">
 
                                                 <input  type="file" class="form-control form-control-file"
-                                                        id="uploadImg1" name="uploadImg1" accept="image/*" 
+                                                        id="fotoPerfil" name="fotoPerfil" accept="image/*" 
                                                         (change)="cambiarImagen($event.target.files[0])">
 
-                                                <label for="uploadImg1"
-                                                    class="  label-input-file btn btn-black btn-round">
-                                                    <span class="btn-label">
-                                                        <i class="fa fa-file-image"></i>
-                                                    </span>
-                                                    Upload a Image
+                                                <label for="fotoPerfil" class="btn btn-primary btn-round btn-lg">
+                                                    <i class="fa fa-file-image"></i> 
+                                                    Subir Foto
                                                 </label>
+
                                             </div>
                                         </div>
-
-
-
                                     </div>
+
+                                    <!-- informacion del usuario -->
                                     <div class="col-md-8">
-                                        <!-- informacion del usuario -->
                                         <div class="form-group">
                                             <label for="name">Sobre mi:
                                                 <span class="required-label">*</span>
@@ -121,9 +116,9 @@
                                                 formControlName="userSobreMi">
                                             </textarea>
                                         </div>
-
                                     </div>
                                 </div>
+
 
                                 <div class="text-right mt-3 mb-3">
                                     <button type="submit" class="btn btn-success mr-2">Actualizar Datos</button>
@@ -132,6 +127,54 @@
                         </form>
                     </div>
 
+
+                    <!-- cambiar contraseña -->
+                    <div class="tab-pane fade" id="seguridad" role="tabpanel" aria-labelledby="seguridad-tab">
+                        <form [formGroup]="cambioPassword" (ngSubmit)="savePassword()">
+                            <div class="card-body">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="name">Contraseña Actual
+                                                <span class="required-label">*</span>
+                                            </label>
+                    
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Tu Contraseña Actual" id="userActualPass"
+                                                name="userActualPass" formControlName="userActualPass">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                    
+                                        <div class="form-group">
+                                            <label for="name">Nueva Contraseña
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Tu Nueva Contraseña" id="userPassword"
+                                                name="userPassword" formControlName="userPassword">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Confirmar contraseña
+                                                <span class="required-label">*</span>
+                                            </label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Ingresa Nuevamente Tu Contraseña " id="userConfirPassword"
+                                                name="userConfirPassword" formControlName="userConfirPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success mr-2">Actualizar contraseña</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
 
                    
@@ -144,7 +187,7 @@
 
         <div class="col-md-4">
             <div class="card card-profile">
-                <div class="card-header" style="background-image: url('https://via.placeholder.com/150')">
+                <div class="card-header" style="background-image: url('assets/img/banner-profile.jpg')">
                     <div class="profile-picture">
                         <div class="avatar avatar-xl">
                             <img src="{{usuario.getImagen}}" alt="..." class="avatar-img rounded-circle">

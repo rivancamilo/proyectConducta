@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Paciente } from 'src/app/models/paciente.model';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { PacientesService } from 'src/app/services/pacientes.service';
 
 @Component({
 	selector: 'app-paciente',
@@ -10,16 +13,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PacienteComponent implements OnInit {
 
 	nuevoPaciente: FormGroup;
+	public imageSubir: File;
+	public imageTemp:any = '';
+	
+	
 
 	constructor(
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private pacienteService:PacientesService,
+		private fileUploadService:FileUploadService
 	) {
 
 		this.crearFormulario();
 	}
 
 	ngOnInit(): void {
-
+		
 	}
 
 	crearFormulario() {
@@ -33,32 +42,61 @@ export class PacienteComponent implements OnInit {
 			pacienteEPS: ['', [Validators.required]],
 			pacienteCiudad: ['', [Validators.required]],
 			pacienteDireccion: ['', [Validators.required]],
-			pacienteEdad: ['', [Validators.required]],
-			pacienteFoto: ['', [Validators.required]],
+			//pacienteEdad: ['', [Validators.required]],
+			//pacienteFoto: [''],
 		})
 
 	}
 
+	/****************************************************************** 
+		detectamos si el input a tenido algun cambio 
+	******************************************************************/
+	cambiarImagen( file: File  ){
+		
+		this.imageSubir = file;
+		if(!file) {
+			return this.imageTemp=null;
+		}
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			this.imageTemp = reader.result;
+			//console.log(reader.result);
+		}
+	}
+
+	/***************************************************************** 
+		ejecutamos el servicio que actualiza la imagen del usuario 
+	*****************************************************************/
+	subirImagen( idPaciente ){
+		this.fileUploadService.cargarFoto(this.imageSubir,'pacientes', idPaciente )
+	}
 
 	crearPaciente() {
+		const pacienteEdad = this.calculoEdad(this.nuevoPaciente.get('pacienteDateNaci').value);
+		const datosPaciente = { 
+			pacienteEdad,
+			...this.nuevoPaciente.value
+		};
 
-		/***************************************************************************************
-		****************************************************************************************
-		***************************************************************************************/
-
-		this.calculoEdad(this.nuevoPaciente.get('pacienteDateNaci').value)
-
-
+		//const edad = this.calculoEdad(this.nuevoPaciente.get('pacienteDateNaci').value);
+		this.pacienteService.crearPaciente( datosPaciente ).subscribe(res => {
+			if(this.imageSubir){
+				this.subirImagen( res._id )
+			}
+			
+			console.log(res)
+		},err =>{
+			console.log(err)
+		})
 	}
 
 
-
+	
 
 	calculoEdad( fechaUsuario ) {
 
-		/**************************************************************************************************
-			El siguiente fragmento de codigo lo uso para igualar la fecha de nacimiento con la fecha de hoy del usuario
-		**************************************************************************************************/
+		//El siguiente fragmento de codigo lo uso para igualar la fecha de nacimiento con la fecha de hoy del usuario
 		var d = new Date(),
 			month = '' + (d.getMonth() + 1),
 			day = '' + d.getDate(),
@@ -107,9 +145,15 @@ export class PacienteComponent implements OnInit {
 			dias = 30 + dias;
 		}
 
-		console.log(`Tu edad es de ${edad} años, ${meses} meses, ${dias} días`);
+		return `${edad} años, ${meses} meses, ${dias} días`;
+		//console.log(`Tu edad es de ${edad} años, ${meses} meses, ${dias} días`);
 
 	}
+
+
+
+
+
 
 	/**************************************************************************************
 	  agregamos get's para las validaciones de los input

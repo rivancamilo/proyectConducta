@@ -6,8 +6,8 @@
             <div class="wizard-body">
                 <div class="row">
 
+                    <!-- ingresar nombres -->
                     <div class="col-md-6">
-                        <!-- ingresar nombres -->
                         <div class="form-group"  [class.has-error]="pacienteNombresNoValid" [class.has-success]="pacienteNombresValid">
                             <label for="name">Nombres
                                 <span class="required-label">*</span>
@@ -15,8 +15,21 @@
                             <input type="text" class="form-control" placeholder="Escribe el nombre del paciente" id="pacienteNombres"
                                 name="pacienteNombres" formControlName="pacienteNombres">
                         </div>
+                    </div>
 
-                        <!-- ingresar tipo y numero de ID -->
+                    <!-- ingresar apellidos -->
+                    <div class="col-md-6">
+                        <div class="form-group" [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
+                            <label for="name">Apellidos
+                                <span class="required-label">*</span>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteApellidos"
+                                name="pacienteApellidos" formControlName="pacienteApellidos">
+                        </div>
+                    </div>
+
+                    <!-- ingresar tipo y numero de ID -->
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Numero de identificacion
                                 <span class="required-label">*</span>
@@ -27,9 +40,8 @@
                                         <select class="form-control" 
                                                 id="pacienteTipoID" name="pacienteTipoID"  
                                                 formControlName="pacienteTipoID" >
-                                            <option value="rol._id" >CC</option>                                                                                
-                                            <option value="rol._id" >CC</option>                                                                                
-                                            <option value="rol._id" >CC</option>                                                                                
+                                            <option value="Reg Civil" >Reg Civil</option>                                                                                
+                                            <option value="TI" >TI</option>                                                                                
                                         </select>
                                     </div>
                                 </div>
@@ -40,47 +52,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- ingresar el nombre de la ciudad -->
-                        <div class="form-group"  [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
-                            <label for="name">Ciudad
-                                <span class="required-label">*</span>
-                            </label>
-                            <input  type="text" class="form-control" 
-                                    placeholder="Escribe tu nombre" id="pacienteCiudad"
-                                    name="pacienteCiudad" formControlName="pacienteCiudad">
-                        </div>
-                        
-                        <!-- subir foto del paciente -->
-                        <div class="form-group">
-                            <label>Foto del Paciente <span class="required-label">*</span></label>
-                            
-                            <div class="input-file input-file-image">
-                                    <img    class="img-upload-preview img-circle" width="100" height="100" 
-                                            src="http://placehold.it/100x100" alt="preview">
-                                    <input  type="file" class="form-control form-control-file" 
-                                            id="uploadImg" name="uploadImg" accept="image/*">
-                                    <label for="uploadImg" class="btn btn-primary btn-round btn-lg">
-                                        <i class="fa fa-file-image"></i> 
-                                        Subir Foto
-                                    </label>
-                                </div>
-                        </div>
-
                     </div>
-                    
+
+                    <!-- ingresar fecha de nacimiento -->
                     <div class="col-md-6">
-                        <!-- ingresar apellidos -->
-                        <div class="form-group" [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
-                            <label for="name">Apellidos
-                                <span class="required-label">*</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteApellidos"
-                                name="pacienteApellidos" formControlName="pacienteApellidos">
-                        </div>
-
-
-                        <!-- ingresar fecha de nacimiento -->
                         <div class="form-group" [class.has-error]="pacienteDateNaciNoValid" [class.has-success]="pacienteDateNaciValid">
                             <label>Fecha de Nacimiento</label>
                             <div class="input-group">
@@ -89,8 +64,22 @@
                                         formControlName="pacienteDateNaci">
                             </div>
                         </div>
+                    </div>
 
-                        <!-- ingresar direccion -->
+                    <!-- ingresar el nombre de la ciudad -->
+                    <div class="col-md-6">
+                        <div class="form-group"  [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
+                            <label for="name">Ciudad
+                                <span class="required-label">*</span>
+                            </label>
+                            <input  type="text" class="form-control" 
+                                    placeholder="Escribe tu nombre" id="pacienteCiudad"
+                                    name="pacienteCiudad" formControlName="pacienteCiudad">
+                        </div>
+                    </div>
+
+                    <!-- ingresar direccion -->
+                    <div class="col-md-6">
                         <div class="form-group" [class.has-error]="pacienteDireccionNoValid" [class.has-success]="pacienteDireccionValid">
                             <label for="name">Dirección de Residencia
                                 <span class="required-label">*</span>
@@ -98,8 +87,38 @@
                             <input type="text" class="form-control" placeholder="Escribe tu nombre" id="pacienteDireccion"
                                 name="pacienteDireccion" formControlName="pacienteDireccion">
                         </div>
+                    </div>
 
-                        <!-- ingresar EPS -->
+                    <!-- subir foto del paciente -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Foto del Paciente <span class="required-label">*</span></label>
+                            
+                            <div class="input-file input-file-image">
+
+                                    <img    class="img-upload-preview img-circle" width="100" height="100"
+                                    [src]="imageTemp" alt="preview"
+                                    *ngIf="imageTemp">
+
+                                    <img    class="img-upload-preview img-circle" width="100" height="100"
+                                            src="assets/img/no-image.jpg" alt="preview"
+                                            *ngIf="!imageTemp">
+
+                                    <input  type="file" class="form-control form-control-file"
+                                            id="uploadImg" name="uploadImg" accept="image/*" 
+                                            (change)="cambiarImagen($event.target.files[0])">
+
+                                    <label for="uploadImg" class="btn btn-primary btn-round btn-lg">
+                                        <i class="fa fa-file-image"></i> 
+                                        Subir Foto
+                                    </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- ingresar EPS -->
+                    <div class="col-md-6">
                         <div class="form-group" [class.has-error]="pacienteEPSNoValid" [class.has-success]="pacienteEPSValid">
                             <label for="name">EPS
                                 <span class="required-label">*</span>
@@ -109,7 +128,6 @@
                         </div>
 
                     </div>
-
 
                 </div>
             </div>

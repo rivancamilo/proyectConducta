@@ -2,3 +2,9 @@
 .cursorPointer{
     cursor: pointer;
 }
+.w80{
+    width: 80px;
+}
+.w100{
+    width: 100px;
+}

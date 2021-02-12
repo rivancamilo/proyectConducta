@@ -1,4 +1,3 @@
-import { from } from "rxjs"
 import { environment } from "src/environments/environment"
 
 
@@ -11,7 +10,7 @@ export class Usuario {
         public userNombres : string,
         public userApellidos : string,
         public userEmail : string,
-        public userEstado : boolean,
+        public userEstado : string,
         public userRolID  : string,
         public userDateAdd : string,
         public userContacto : string,

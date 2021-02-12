@@ -24,6 +24,7 @@ const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'usuarios', component: UsuariosComponent },
             { path:'usuario', component:UsuarioComponent },
+            { path:'usuario/:id', component:UsuarioComponent },
             { path:'entrenamiento' , component:EntrenamientoComponent },
             { path:'entrenamientos', component:EntrenamientosComponent },
             { path:'paciente', component:PacienteComponent },
