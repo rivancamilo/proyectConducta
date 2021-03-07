@@ -23,10 +23,10 @@ la base de datos todo esot con fines de seguridad
 
 ****************************************************************************************/
 PacienteSchema.methods.toJSON = function(){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.__v;
-    return userObject;
+    let paciente = this;
+    let pacienteObject = paciente.toObject();
+    delete pacienteObject.__v;
+    return pacienteObject;
 }
     
 

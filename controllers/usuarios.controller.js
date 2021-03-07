@@ -6,11 +6,11 @@ const { generarJWT } = require('../helpers/jwt');
 const getUsuarios = async (req,res = response)=>{
     
     const desde = Number(req.query.desde) || 0 ;
-
     //ejecutamos ambas consultas al mismo tiempo
     const [usuario, total ] = await Promise.all([
         Usuario
                 .find({})
+                .sort({_id:'desc'})
                 .skip(desde)
                 .limit(5),
 
@@ -18,7 +18,6 @@ const getUsuarios = async (req,res = response)=>{
 
     ])
    
-
     res.json({
         ok:true,
         usuario,
@@ -27,6 +26,25 @@ const getUsuarios = async (req,res = response)=>{
     })
 
 }
+
+const getUsuario = async (req,res = response) =>{
+
+    const id = req.params.id;
+    //ejecutamos ambas consultas al mismo tiempo
+    const usuario = await Usuario.findById(id);
+    if (!usuario) {
+        return res.status(500).json({
+            ok:false,
+            usuario: "Error no existe",
+        });
+    }
+        
+    res.json({
+        ok:true,
+        usuario,
+    })
+}
+
 
 const crearUsuario = async (req,res = response ) =>{
     
@@ -39,9 +57,7 @@ const crearUsuario = async (req,res = response ) =>{
             userDateAdd,
             userContacto,
             userSobreMi,
-            userAvatar } = req.body;
-
-        
+            userAvatar } = req.body;  
 
     try {
 
@@ -104,16 +120,39 @@ const updateUsuario = async (req, res = response ) => {
                 msg:'el usuario no esta registrado'
             })
         }
-        
-        //realizamos la actualizaciones de los datos menos el email
-        const {userEmail, ...campos} = req.body;
-        //delete campos.userEmail;// eliminamos el campo de email ya que no se podra actualizar
-        const usuarioActualizado = await Usuario.findByIdAndUpdate(idUser,campos, { new:true })
 
-        res.json({
-            ok:true,
-            usuario:usuarioActualizado
-        })
+        //extraemos los datos del body 
+        const {  userPassword, formulario, ...campos } = req.body;
+
+        if( formulario === 'usuario' ){
+
+            /**************************************************************************
+            encriptamos la contraseña en una sola via
+            **************************************************************************/
+            const salt = bcryptjs.genSaltSync();//generamos una cadena aleatoria
+            const passwordEncript = bcryptjs.hashSync( userPassword, salt )
+            const datos = {
+                userPassword:passwordEncript,
+                campos
+            }
+
+            const usuarioActualizado = await Usuario.findByIdAndUpdate(idUser,datos, { new:true, useFindAndModify: false })
+            res.json({
+                ok:true,
+                usuario:usuarioActualizado
+            })
+
+        }else{
+
+            const { formulario,...datos2 } = req.body;
+            const usuarioActualizado2 = await Usuario.findByIdAndUpdate(idUser,datos2, { new:true, useFindAndModify: false })
+            res.json({
+                ok:true,
+                usuario:usuarioActualizado2
+            })
+        }
+
+        
 
     } catch (error) {
 
@@ -129,7 +168,7 @@ const updateUsuario = async (req, res = response ) => {
 const deleteUsuario = async (req, res = response ) =>{
     
     const idUser = req.params.id;
-
+    console.log('Usuario a Eliminar',idUser)
     try {
         /*********************************************************************
         buscamos el usuario a eliminar
@@ -161,9 +200,101 @@ const deleteUsuario = async (req, res = response ) =>{
 }
 
 
+const validaPassActual = async ( req, res = response )=>{
+
+    const idUser = req.params.id;
+    console.log(idUser)
+    console.log(req.body)
+    const {  passActual } = req.body;
+
+    try {
+        /*******************************************************************************
+        Validamos si existe un usuario con ese id
+        *******************************************************************************/
+        const usuarioDB = await Usuario.findById(idUser)
+        if( !usuarioDB ){
+            return res.status(404).json({
+                ok:false,
+                msg:'el usuario no se encontro'
+            })
+        }
+
+        /*******************************************************************************
+        Verificar contraseña 
+        *******************************************************************************/
+        const validaPass = bcryptjs.compareSync(passActual, usuarioDB.userPassword );
+        if( !validaPass ){ 
+            return res.json({
+                ok:false,
+                msg:'usuario o contraseña no son validos'
+            })
+        }
+
+        res.json({
+            ok:true,
+            msg:'password valido'
+        })
+
+        
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Error inesperado en el servidor'
+        })
+
+    }
+}
+
+
+const cambiarPassword = async ( req, res = response) => {
+    
+    const idUser = req.params.id;
+
+    try {
+        
+        const usuarioDB = await Usuario.findById(idUser)
+        if( !usuarioDB ){
+            return res.status(404).json({
+                ok:false,
+                msg:'el usuario no esta registrado'
+            })
+        }
+
+        //extraemos los datos del body 
+        const {  userPassword } = req.body;
+        /**************************************************************************
+        encriptamos la contraseña en una sola via
+        **************************************************************************/
+        const salt = bcryptjs.genSaltSync();//generamos una cadena aleatoria
+        const passwordEncript = bcryptjs.hashSync( userPassword, salt )
+        const datos = { userPassword:passwordEncript }
+
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(idUser,datos, { new:true, useFindAndModify: false })
+        res.json({
+            ok:true,
+            usuario:usuarioActualizado
+        })
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Error inesperado en el servidor'
+        })
+    }
+    
+
+}
+
 module.exports= {
     getUsuarios,
+    getUsuario,
     crearUsuario,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    validaPassActual,
+    cambiarPassword
 }

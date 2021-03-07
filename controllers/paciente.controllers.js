@@ -5,14 +5,44 @@ const { generarJWT } = require('../helpers/jwt');
 
 const getPacientes = async (req,res)=>{
     
-    const paciente = await Paciente.find();
+    const desde = Number(req.query.desde) || 0 ;
+    //ejecutamos ambas consultas al mismo tiempo
+    const [paciente, total ] = await Promise.all([
+        Paciente
+                .find({})
+                .sort({_id:'desc'})
+                .skip(desde)
+                .limit(5),
 
+        Paciente.countDocuments()
+
+    ])
+   
     res.json({
         ok:true,
         paciente,
+        total,
         id:req.idUserToken // id del usuario que hizo la peticion
     })
 
+}
+
+const getPaciente = async (req,res = response) =>{
+
+    const id = req.params.id;
+    
+    const paciente = await Paciente.findById(id);
+    if (!paciente) {
+        return res.status(500).json({
+            ok:false,
+            paciente: "Error no existe",
+        });
+    }
+        
+    res.json({
+        ok:true,
+        paciente,
+    })
 }
 
 const crearPacientes = async (req,res = response ) =>{
@@ -147,6 +177,7 @@ const deletePacientes = async (req, res = response ) =>{
 
 module.exports= {
     getPacientes,
+    getPaciente,
     crearPacientes,
     updatePacientes,
     deletePacientes
