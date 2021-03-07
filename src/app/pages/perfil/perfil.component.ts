@@ -23,17 +23,16 @@ export class PerfilComponent implements OnInit {
 	public headerTop = document.querySelector('.navbar');
 	public sidebar = document.querySelector('.sidebar');
 	public body = document.querySelector('#colorBody');
-	
-	
-
 
 	perfilUsuario:FormGroup;
 	cambioPassword:FormGroup;  
 
+	public validActualPass:Boolean;
 
-	constructor(private userService:UsuariosService,
-				private fb:FormBuilder,
-				private fileUploadService:FileUploadService) { 
+
+	constructor(	private userService:UsuariosService,
+					private fb:FormBuilder,
+					private fileUploadService:FileUploadService) { 
 
 		this.usuario = this.userService.usuario;
 		this.creaFormPerfil();//INSTANCIA PARA CREAR FORM DATOS PERFIL
@@ -43,7 +42,6 @@ export class PerfilComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.datosPerfil();
-
 	}
 
 
@@ -53,15 +51,13 @@ export class PerfilComponent implements OnInit {
 	/* creamos la instancia de los campos que tiene el formulario perfil */
 	creaFormPerfil(){
 		this.perfilUsuario = this.fb.group({
-			userNombres:[this.usuario.userNombres ],
-			userApellidos:[ this.usuario.userApellidos ],
+			userNombres:[this.usuario.userNombres, Validators.required ],
+			userApellidos:[ this.usuario.userApellidos, Validators.required ],
 			userEmail:[ {value:this.usuario.userEmail , disabled:true } ],
 			userContacto:[ this.usuario.userContacto ],
 			userSobreMi:[ this.usuario.userSobreMi ]
 		})
 	}
-
-	
 
 	/* Cargamos los datos del usuario en el input */
 	datosPerfil(){
@@ -95,6 +91,22 @@ export class PerfilComponent implements OnInit {
 	}
 	/* actualizamos todos los datos del usuario */ 
 	actualizaPerfil(){
+		//validamos si el formulario es Valido
+		if (this.perfilUsuario.invalid) {
+			return Object.values(this.perfilUsuario.controls).forEach(control => {
+				control.markAllAsTouched();
+				
+				Swal.fire({
+					title: 'Oops...',
+					text: 'No has ingresado la información completa!',
+					icon:'error'
+				})
+
+			});
+		}
+
+
+
 		//validamos si el usuario subio una imagen
 		if(this.imageSubir){
 			this.subirImagen();
@@ -124,26 +136,80 @@ export class PerfilComponent implements OnInit {
 
 	}
 
+	get userNombresNoValid() {
+		return this.perfilUsuario.get('userNombres').invalid && this.perfilUsuario.get('userNombres').touched;
+	}
+	get userNombresValid() {
+		return this.perfilUsuario.get('userNombres').valid && this.perfilUsuario.get('userNombres').touched;
+	}
 
+	get userApellidosNoValid() {
+		return this.perfilUsuario.get('userApellidos').invalid && this.perfilUsuario.get('userApellidos').touched;
+	}
+
+	get userApellidosValid() {
+		return this.perfilUsuario.get('userApellidos').valid && this.perfilUsuario.get('userApellidos').touched;
+	}
 
 
 	/****************************************************************************************
 	* 		ACTUALIZAMOS LA CONTRASEÑA DEL USUARIO 
 	****************************************************************************************/
 	creaFormPassword(){
+
 		this.cambioPassword = this.fb.group({
 			userActualPass: [,Validators.required],
 			userPassword:[,Validators.required],
 			userConfirPassword:[,Validators.required]
+		},{
+			validators:[ this.userService.passwordIguales('userPassword','userConfirPassword')]
 		})
 	}
 
+	//validar contraseña actual
+	passwordActual(){
+		const passActual = this.cambioPassword.get('userActualPass').value;
+		if(passActual){
+			this.userService.validaPass(this.usuario._id,passActual).subscribe( resp => {
+				//console.log(resp)
+				this.validActualPass = resp
+			})
+		}
+	}
+
 	savePassword(){
-		console.log( this.cambioPassword.value )
+
+		if (this.cambioPassword.invalid) {
+			if(this.cambioPassword.controls.userPassword.status != this.cambioPassword.controls.userConfirPassword.status){
+				return Swal.fire({
+					title: 'Oops...',
+					text: '¡Las nuevas contraseñas NO coinciden! ',
+					icon:'error'
+				})
+			}
+		}else if(!this.validActualPass){
+			return Swal.fire({
+				title: 'Oops...',
+				text: 'La contraseña actual no es valida!',
+				icon:'error'
+			})
+		}
+		const newPass = this.cambioPassword.get('userPassword').value;
+		this.userService.cambioPasword(this.usuario._id,newPass).subscribe( resp => {
+			Swal.fire({
+				title: 'Nueva Contraseña',
+				text: 'Se ha actualizado correctamente la contraseña actual!',
+				icon:'success'
+			})
+		})
 	}
 	
 	get invalidActualPass(){
-		return this.cambioPassword.get('userActualPass').invalid && this.cambioPassword.get('userActualPass').touched;
+		return !this.validActualPass && this.cambioPassword.get('userActualPass').touched;
+	}
+
+	get validActualPassword(){
+		return this.validActualPass && this.cambioPassword.get('userActualPass').touched;
 	}
 
 	get invalidPassword(){
@@ -155,7 +221,7 @@ export class PerfilComponent implements OnInit {
 	}
 
 	/*********************************************************************************
-
+	*			Personalizar DashBoard
 	*********************************************************************************/
 	cambioColorHeader(color: string) {
 		this.header.setAttribute('data-background-color', color);
@@ -171,5 +237,25 @@ export class PerfilComponent implements OnInit {
 	cambioBody( color: string ){
 		this.body.setAttribute('data-background-color', color);
 	}
+
+	saveColorsDashborad(){
+		const colorHeader = this.header.getAttribute('data-background-color');
+		const colorHeaderTop = this.headerTop.getAttribute('data-background-color');
+		const colorSiderbar = this.sidebar.getAttribute('data-background-color');
+		const colors = {
+			colorHeader,
+			colorHeaderTop,
+			colorSiderbar
+		}
+
+		localStorage.setItem('colors', JSON.stringify(colors))
+		Swal.fire({
+			title: 'Nuevo Tema Dashboard',
+			text: '¡Se ha cambiado el tema correctamente!',
+			icon:'success'
+		})
+	}
+
+	
 	
 }

@@ -14,7 +14,8 @@ export class Paciente {
         public pacienteCiudad: string,
         public pacienteDireccion: string,
         public pacienteEdad: string,
-        public pacienteFoto: string
+        public pacienteFoto: string,
+        public _id? : string,
     ) {
 
     }

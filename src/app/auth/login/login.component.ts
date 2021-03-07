@@ -22,12 +22,11 @@ export class LoginComponent implements OnInit {
 		this.crearFormulario();
 	}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	crearFormulario() {
 		this.loginUser = this.fb.group({
-			userEmail:[ localStorage.getItem('email') || 'martin@email.com', [ Validators.required ]],
+			userEmail:[ localStorage.getItem('email') || 'mario@email.com', [ Validators.required ]],
 			userPassword:['123', [ Validators.required ]],
 			userSaveDatos:[  false ]
 		})
@@ -47,8 +46,7 @@ export class LoginComponent implements OnInit {
 
 
 		},err  =>{
-
-			console.log(err.error.msg)
+			//console.log(err.error.msg)
 			Swal.fire(
 				'Error',
 				err.error.msg,

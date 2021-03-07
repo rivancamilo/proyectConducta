@@ -15,10 +15,9 @@ export class UsuarioComponent implements OnInit {
 
 	public imageSubir: File;
 	public imageTemp:any = '';
-
-	nuevoUsuario: FormGroup;//referencia local del formulario
-	idUsuario : string;
-	tituloPage: string;
+	public nuevoUsuario: FormGroup;//referencia local del formulario
+	public idUsuario : string;
+	public tituloPage: string;
 
 	constructor(	private fb: FormBuilder,
 					private userService:UsuariosService,
@@ -28,7 +27,6 @@ export class UsuarioComponent implements OnInit {
 	) { 
 			
 		this.crearFormulario();
-
 		this.idUsuario = this.routerParams.snapshot.paramMap.get('id');
 		
 	}
@@ -95,7 +93,9 @@ export class UsuarioComponent implements OnInit {
 				text:'¡Se ha registrado un nuevo usuario satisfactoriamente!',
 				icon:'success'
 			})
+
 			this.router.navigateByUrl('/dashboard/usuarios')
+
 		},err =>{
 
 			Swal.fire({
@@ -142,9 +142,15 @@ export class UsuarioComponent implements OnInit {
 				icon:'success'
 			})
 			this.router.navigateByUrl('/dashboard/usuarios')
-			console.log(res)
+			
 		},err =>{
-			console.warn(err)
+			
+			Swal.fire({
+				title: 'Oops...',
+				text: err.error.msg,
+				icon:'error'
+			})
+
 		})
 	}
 
@@ -153,21 +159,24 @@ export class UsuarioComponent implements OnInit {
 	*****************************************************************/
 	guardarUsuario(){
 		//Validamos si el formulario es valido de no ser asi retornamos el posteo 
-		console.log(this.nuevoUsuario)
 
 		if (this.nuevoUsuario.invalid) {
 			return Object.values(this.nuevoUsuario.controls).forEach(control => {
 				control.markAllAsTouched();
-				console.log('Error campos invalidos')
+
+				Swal.fire({
+					title: 'Oops...',
+					text: 'No has ingresado la información completa!',
+					icon:'error'
+				})
+
 			});
 		}
-
 
 
 		if (!this.idUsuario) {
 			this.crearUsuario();
 		} else {
-			
 			this.updateUsuario();
 		}
 

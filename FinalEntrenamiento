@@ -1,0 +1,608 @@
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-5 col-md-2">
+                <div    class="nav flex-column nav-pills nav-secondary nav-pills-no-bd nav-pills-icons" id="v-pills-tab-with-icon" 
+                        role="tablist" aria-orientation="vertical">
+                    
+                    <a  class="nav-link active" id="primeraFaseTab"  data-toggle="pill" href="#primeraFase" role="tab" 
+                        aria-controls="primeraFase" aria-selected="true">
+                        <i class="fas fa-diagnoses fa-5x"></i>
+                        Primera Fase
+                    </a>
+
+                    <a  class="nav-link" id="segundaFaseTab" data-toggle="pill" href="#segundaFase" role="tab" 
+                        aria-controls="segundaFase" aria-selected="false">
+                        <i class="fas fa-user-md fa-5x "></i>
+                        Segunda Fase
+                    </a>
+
+                    <a  class="nav-link" id="terceraFaseTab" data-toggle="pill" href="#terceraFase" role="tab" 
+                        aria-controls="terceraFase" aria-selected="false">
+                        <i class="fas fa-stethoscope fa-5x"></i>
+                        Tercera Fase
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-7 col-md-10">
+
+                <form [formGroup]="formEntrenamient" (ngSubmit)="guardarEntrenamiento()">
+
+                    <div class="tab-content" id="v-pills-with-icon-tabContent">
+                        <!--******************************************************************************************* 
+                            Primera Fase 
+                        *******************************************************************************************-->
+                        <div class="tab-pane fade show active" id="primeraFase" role="tabpanel" aria-labelledby="primeraFaseTab">
+
+                            <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="primerMomentoF1tab" data-toggle="pill" href="#primerMomentoF1" 
+                                        role="tab" aria-controls="primerMomentoF1" aria-selected="true">Primer Momento
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  class="nav-link" id="segundoMomentoF1tab" data-toggle="pill" href="#segundoMomentoF1" 
+                                        role="tab" aria-controls="segundoMomentoF1" aria-selected="false">Segundo Momento
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                                <!--********************************************************************************************** 
+                                    Primer Momento 
+                                **********************************************************************************************-->
+                                <div class="tab-pane fade show active" id="primerMomentoF1" role="tabpanel" aria-labelledby="primerMomentoF1tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Instrucción Verbal </h4>
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            <div *ngIf="alertError" class="alert alert-danger" role="alert">
+                                                <strong>Error, </strong> has ingresado un valor que esta fuera del rango permitido!
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6" formGroupName="instruccionVerbal">
+                                                    <ul class="list-group list-group-bordered "
+                                                        *ngFor="let emocion of emocionesLeft">
+                                                        <li class="lista-item" >
+                                                            <div class="d-flex row align-items-center">
+                                                                <div class="col-6">
+                                                                    <label>{{ emocion.nombreEmocion }}</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input  type="text" class="form-control input-full" id="inlineinput" 
+                                                                            placeholder="puntaje" [formControlName]="emocion.controlName" (keyup)="validInputInstruccionVerbal()">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            
+                                                <div class="col-md-6" formGroupName="instruccionVerbal">
+                                                    <ul class="list-group list-group-bordered "
+                                                        *ngFor="let emocion of emocionesRight">
+                                                        <li class="lista-item" >
+                                                            <div class="d-flex row align-items-center">
+                                                                <div class="col-6">
+                                                                    <label>{{ emocion.nombreEmocion }}</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input  type="text" class="form-control input-full" id="inlineinput" 
+                                                                            placeholder="puntaje" [formControlName]="emocion.controlName" (keyup)="validInputInstruccionVerbal()">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Expresión Facial</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <div class="col-md-6" formGroupName="expresionFacial">
+                                                    <ul class="list-group list-group-bordered "
+                                                        *ngFor="let emocion of emocionesLeft">
+                                                        <li class="lista-item" >
+                                                            <div class="d-flex row align-items-center">
+                                                                <div class="col-6">
+                                                                    <label>{{ emocion.nombreEmocion }}</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input  type="text" class="form-control input-full" id="inlineinput" 
+                                                                            placeholder="puntaje" 
+                                                                            [formControlName]="emocion.controlName"
+                                                                            (keyup)="validInputExpresionFacial()">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            
+                                                <div class="col-md-6" formGroupName="expresionFacial">
+                                                    <ul class="list-group list-group-bordered "
+                                                        *ngFor="let emocion of emocionesRight">
+                                                        <li class="lista-item" >
+                                                            <div class="d-flex row align-items-center">
+                                                                <div class="col-6">
+                                                                    <label>{{ emocion.nombreEmocion }}</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input  type="text" class="form-control input-full" id="inlineinput" 
+                                                                            placeholder="puntaje" 
+                                                                            [formControlName]="emocion.controlName"
+                                                                            (keyup)="validInputExpresionFacial()">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-right mt-3 mb-3">
+                                        <button class="btn btn-success mr-2">Guardar</button>
+                                    </div>
+
+                                </div>
+
+                                <!--********************************************************************************************** 
+                                    Segundo Momento 
+                                **********************************************************************************************-->
+                                <div class="tab-pane fade" id="segundoMomentoF1" role="tabpanel" aria-labelledby="segundoMomentoF1tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Selección de Emocion</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                
+                                                <div class="col-12" formGroupName="selectEmocion">
+                                                    <ul class="list-group list-group-bordered"
+                                                        *ngFor="let emocion of emcionesFull">
+                                                        <li class="lista-item">
+                                                            <div class="d-flex row align-items-center">
+                                                                <div class="col-4">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <label>{{ emocion.nombreEmocion }}</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <input  type="text" class="form-control input-full" 
+                                                                            placeholder="puntaje" [formControlName]="emocion.controlName" 
+                                                                            (keyup)="validInputSelectEmocion()">
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <span class="badge badge-warning">{{ emocion.controlName }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--**************************  End  Primera Fase  *****************************************-->  
+
+                        <!--******************************************************************************************* 
+                            Segunda Fase 
+                        *******************************************************************************************-->
+                        <div class="tab-pane fade" id="segundaFase" role="tabpanel" aria-labelledby="segundaFaseTab">
+
+                            <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a  class="nav-link active" id="primerMomentoF2tab" data-toggle="pill" href="#primerMomentoF2" 
+                                        role="tab" aria-controls="primerMomentoF2" aria-selected="true">Primer Momento
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  class="nav-link" id="segundoMomentoF2tab" data-toggle="pill" href="#segundoMomentoF2" 
+                                        role="tab" aria-controls="pills-profile" aria-selected="false">Segundo Momento
+                                    </a>
+                                </li>
+                                
+                            </ul>
+
+                            <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                                <!--********************************************************************************************* 
+                                    Primer Momento 
+                                *********************************************************************************************-->
+                                
+                                <div class="tab-pane fade show active" id="primerMomentoF2" role="tabpanel" aria-labelledby="primerMomentoF2tab">
+                                    
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Reconocimiento de emociones propias</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <label for="f2CheckObserPm">Ingrese una calificación de acuerdo a la emoción manifestada</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input  class="form-check-input" type="checkbox" id="f2CheckObserPm" 
+                                                                    formControlName="f2CheckObserPm">
+                                                            <span class="form-check-sign">Observaciones</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input  type="number" class="form-control"  
+                                                                placeholder="Ingrese un valor de la escala Likert 0-100%"
+                                                                formControlName="f2ValEmocionManifesPm">
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
+                                                <div class="col-6">
+                                                    <div class="d-flex flex-row justify-content-center  bd-highlight align-items-center">
+                                                        <div class="p-2 bd-highlight">
+                                                            <span class="badge badge-warning">ghgvhfgfg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- *************************************************************** -->
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="f2ObservacionManifesPm">Observaciones</label>
+                                                        <textarea   class="form-control" id="f2ObservacionManifesPm" rows="3"
+                                                                    formControlName="f2ObservacionManifesPm">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label for="f2ValRelatoPm">Ingrese una calificación con base al relato del niño</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input  type="number" class="form-control" id="f2ValRelatoPm" 
+                                                                placeholder="Ingrese un valor de la escala Likert 0-100%"
+                                                                formControlName="f2ValRelatoPm">
+                                                    </div>
+                                                </div>
+
+                                                <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
+                                                <div class="col-6">
+                                                    <div class="d-flex flex-row justify-content-center  bd-highlight align-items-center">
+                                                        <div class="p-2 bd-highlight">
+                                                            <span class="badge badge-warning">ghgvhfgfg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- *************************************************************** -->
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="f2ObservacionRelatoPm">Observaciones</label>
+                                                        <textarea   class="form-control" id="f2ObservacionRelatoPm" rows="3"
+                                                                    formControlName="f2ObservacionRelatoPm">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div> 
+                                
+                                <!--********************************************************************************************* 
+                                    Segundo Momento 
+                                *********************************************************************************************-->
+                                <div class="tab-pane fade" id="segundoMomentoF2" role="tabpanel" aria-labelledby="segundoMomentoF2tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Reconocimiento de emociones de otros</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <label for="f2CheckObserSm">Ingrese una calificación para emoción indicada por el niño</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input  class="form-check-input" type="checkbox"  id="f2CheckObserSm"
+                                                                    formControlName="f2CheckObserSm">
+                                                            <span class="form-check-sign">Observaciones</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input  type="number" class="form-control" 
+                                                                placeholder="Ingrese un valor de la escala Likert 0-100"
+                                                                formControlName="f2ValEmocionIndicadaSm">
+                                                    </div>
+                                                </div>
+
+                                                <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
+                                                <div class="col-6">
+                                                    <div class="d-flex flex-row justify-content-center  bd-highlight align-items-center">
+                                                        <div class="p-2 bd-highlight">
+                                                            <span class="badge badge-warning">ghgvhfgfg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- *************************************************************** -->
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="f2ObservacionEmocionIndicadaSm">Observaciones</label>
+                                                        <textarea   class="form-control" id="f2ObservacionEmocionIndicadaSm" rows="3"
+                                                                    formControlName="f2ObservacionEmocionIndicadaSm">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label for="f2ValImitacionSm">Ingrese una calificación para la imitación</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <input  type="number" class="form-control" id="f2ValImitacionSm"
+                                                                placeholder="Ingrese un valor de la escala Likert 0-100"
+                                                                formControlName="f2ValImitacionSm">
+                                                    </div>
+                                                </div>
+                                                <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
+                                                <div class="col-6">
+                                                    <div class="d-flex flex-row justify-content-center  bd-highlight align-items-center">
+                                                        <div class="p-2 bd-highlight">
+                                                            <span class="badge badge-warning">ghgvhfgfg</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- *************************************************************** -->
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="f2ObservacionImitacionSm">Observaciones</label>
+                                                        <textarea   class="form-control" id="f2ObservacionImitacionSm" rows="3"
+                                                                    formControlName="f2ObservacionImitacionSm">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                
+                                
+                            </div>
+                        </div>
+                        <!--**************************  End  Segunda Fase  *****************************************-->  
+
+
+                        <!--******************************************************************************************* 
+                            Tercera Fase 
+                        *******************************************************************************************-->
+                        <div class="tab-pane fade" id="terceraFase" role="tabpanel" aria-labelledby="terceraFaseTab">
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Instrucción Verbal </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-bordered">
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-bordered">
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    <li class="lista-item">
+
+                                                        <div class="d-flex row align-items-center">
+                                                            <div class="col-7">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="diversion">
+                                                                    <label class="custom-control-label" for="diversion">Diversión</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5">
+                                                                <input type="text" class="form-control input-full" id="inlineinput" placeholder="Enter Input">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
+                                                    
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="comment">Comment</label>
+                                                <textarea class="form-control" id="comment" rows="5">
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-next btn-danger">
+                                            <i class="fas fa-save "></i> Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                        </div>
+                        <!--**************************  End  Tercera Fase  *****************************************-->  
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

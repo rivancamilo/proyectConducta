@@ -1,7 +1,7 @@
 <div class="row">
     <div class="wizard-container wizard-round col-md-9">
 
-        <form [formGroup]="nuevoPaciente" (ngSubmit)="crearPaciente()">
+        <form [formGroup]="nuevoPaciente" (ngSubmit)="savePaciente()">
 
             <div class="wizard-body">
                 <div class="row">
@@ -19,7 +19,7 @@
 
                     <!-- ingresar apellidos -->
                     <div class="col-md-6">
-                        <div class="form-group" [class.has-error]="pacienteCiudadNoValid" [class.has-success]="pacienteCiudadValid">
+                        <div class="form-group" [class.has-error]="pacienteApellidosNoValid" [class.has-success]="pacienteApellidosValid">
                             <label for="name">Apellidos
                                 <span class="required-label">*</span>
                             </label>
@@ -30,7 +30,7 @@
 
                     <!-- ingresar tipo y numero de ID -->
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group" [class.has-error]="pacienteIDNoValid" [class.has-success]="pacienteIDValid">
                             <label for="name">Numero de identificacion
                                 <span class="required-label">*</span>
                             </label>
@@ -92,7 +92,7 @@
                     <!-- subir foto del paciente -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Foto del Paciente <span class="required-label">*</span></label>
+                            <label>Foto del Paciente</label>
                             
                             <div class="input-file input-file-image">
 

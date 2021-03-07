@@ -60,16 +60,16 @@ export class UsuariosComponent implements OnInit {
 		})
 	}
 
-	eliminarUsuario(usuario: Usuario, indice: number) {
+	eliminarUsuario(idUsuarioDelete, indice: number) {
 
-		if (usuario._id === this.usuarioService.idUser) {
+		if (idUsuarioDelete === this.usuarioService.idUser) {
 			return Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
 				text: 'No puede eliminarse a si mismo!',
 			})
 		}
-
+		//console.log(idUsuarioDelete)
 		Swal.fire({
 			title: 'Esta segur@?',
 			text: "¡Una vez elimines el usuario, los cambios NO se puede deshacer!",
@@ -82,7 +82,7 @@ export class UsuariosComponent implements OnInit {
 		}).then((result) => {
 			if (result.isConfirmed) {
 
-				this.usuarioService.eliminarUsuario(usuario).subscribe(resp => {
+				this.usuarioService.eliminarUsuario(idUsuarioDelete).subscribe(resp => {
 					this.usuarios.splice(indice, 1);
 					Swal.fire(
 						'Usuario Eliminado!',
@@ -93,6 +93,7 @@ export class UsuariosComponent implements OnInit {
 				
 			}
 		})
+
 
 	}
 

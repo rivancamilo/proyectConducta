@@ -120,9 +120,9 @@ export class UsuariosService {
 
 	}
 
-	eliminarUsuario(usuario){
+	eliminarUsuario(IDusuario){
 		//http://localhost:3800/api/usuarios/5ffb6522a6303a183c79d969
-		return  this.http.delete(`${base_url}usuarios/${usuario._id}`, this.headers)
+		return  this.http.delete(`${base_url}usuarios/${IDusuario}`, this.headers)
 	}
 
 	datosUsuario(idUsuario){
@@ -168,5 +168,24 @@ export class UsuariosService {
 		}
 	}
 
+	validaPass( id:string, passActual:string ){
+		//http://localhost:3800/api/usuarios/valida/584375uhfdgjkhfd
+		const datos = {
+			passActual
+		}
+		return this.http.post<any>(`${base_url}usuarios/valida/${id}`,datos,this.headers)
+		.pipe(map(res => {
+			return res.ok
+		}))
+
+	}
+
+
+	cambioPasword(id:string, nuevoPass:string){
+		//http://localhost:3800/api/usuarios/cambiopass/584375uhfdgjkhfd
+		const datos = { userPassword:nuevoPass }
+		return this.http.post(`${base_url}usuarios/cambiopass/${id}`,datos,this.headers)
+
+	}
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Paciente } from 'src/app/models/paciente.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { PacientesService } from 'src/app/services/pacientes.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-pacientes',
@@ -21,7 +22,9 @@ export class PacientesComponent implements OnInit {
 	constructor(
 				private pacienteService: PacientesService,
 				private busquedaService:BusquedasService
-	){ }
+	){ 
+		this.cargarPacientes();
+	}
 
 	ngOnInit(): void {
 		this.cargarPacientes();
@@ -59,5 +62,33 @@ export class PacientesComponent implements OnInit {
 		})
 	}
 
+	eliminarPaciente(paciente: Paciente, indice: number) {
 
+		
+
+		Swal.fire({
+			title: 'Esta segur@?',
+			text: "¡Una vez elimines el paciente, los cambios NO se puede deshacer!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, Eliminar',
+			cancelButtonText: 'No',
+		}).then((result) => {
+			if (result.isConfirmed) {
+
+				this.pacienteService.deletePaciente(paciente).subscribe(resp => {
+					this.pacientes.splice(indice, 1);
+					Swal.fire(
+						'Paciente Eliminado!',
+						'¡Se ha eliminado satisfactoriamente el paciente!',
+						'success'
+					)
+				})
+				
+			}
+		})
+
+	}
 }
