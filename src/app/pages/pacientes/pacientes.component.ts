@@ -52,19 +52,18 @@ export class PacientesComponent implements OnInit {
 		})
 	}
 
+
 	buscar( termino ){
 		if( termino.length === 0 ){
 			return this.pacientes = this.pacientesTemp;
 		}
 
-		this.busquedaService.busqueda('pacientes',termino).subscribe((resp:any) => {
+		this.busquedaService.busqueda('pacientes',termino).subscribe((resp:Paciente[]) => {
 			this.pacientes = resp
 		})
 	}
 
 	eliminarPaciente(paciente: Paciente, indice: number) {
-
-		
 
 		Swal.fire({
 			title: 'Esta segur@?',

@@ -8,8 +8,14 @@
                             <i class="fa fa-search search-icon"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                    <div class="input-group-append">
+
+                    <input  type="text" class="form-control" 
+                    aria-label="Text input with dropdown button"
+                    placeholder="Numero de Identidad"
+                    (keyup)="buscar(txtTermino.value)"
+                    #txtTermino>
+
+                    <!-- <div class="input-group-append">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -18,7 +24,7 @@
                             <div role="separator" class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <a routerLink="/dashboard/paciente" class="btn btn-success d-none d-sm-inline-block">Nuevo Paciente</a>

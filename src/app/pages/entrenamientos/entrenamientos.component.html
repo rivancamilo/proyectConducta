@@ -29,7 +29,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <!-- <th scope="col">Foto</th> -->
+                        <th scope="col"></th> 
                         <th scope="col">Nombre Completo</th>
                         <th scope="col">Edad</th>
                         <th scope="col">Total Fase 1</th>
@@ -42,13 +42,14 @@
                 <tbody>
 
                     <tr *ngFor="let item of entrenamientos">
-                        <!-- <td>
-                            <a class="user-avatar">
+                        <td>
+                            <i class="fas fa-check-double"></i>
+                            <!-- <a class="user-avatar">
                                 <div class="avatar avatar-online">
                                     <img alt="..." class="avatar-img rounded-circle">
                                 </div>
-                            </a>
-                        </td> -->
+                            </a> -->
+                        </td>
                         <td>{{ item.paciente.pacienteNombres }} {{ item.paciente.pacienteApellidos }}</td>
                         <td>{{ item.paciente.pacienteEdad }}</td>
                         <td>{{ item.totalPromeFase1 | number:'2.0-1'}}</td>

@@ -67,7 +67,6 @@ export class UsuarioComponent implements OnInit {
 		reader.readAsDataURL(file);
 		reader.onloadend = () => {
 			this.imageTemp = reader.result;
-			//console.log(reader.result);
 		}
 	}
 
@@ -213,9 +212,6 @@ export class UsuarioComponent implements OnInit {
 
 		return (pass1 === pass2 && this.nuevoUsuario.get('userConfirPassword').touched) ? true : false;
 	}
-
-
-
 
 
 	get userNombresNoValid() {

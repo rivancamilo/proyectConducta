@@ -54,9 +54,9 @@ export class UsuariosComponent implements OnInit {
 			return this.usuarios = this.usuariosTemp;
 		}
 
-		this.busquedaService.busqueda('usuarios', termino).subscribe(resp => {
-			//this.usuarios = resp
-			console.log(resp)
+		this.busquedaService.busqueda('usuarios', termino).subscribe((resp:Usuario[]) => {
+			this.usuarios = resp
+			//console.log(resp)
 		})
 	}
 
@@ -68,31 +68,34 @@ export class UsuariosComponent implements OnInit {
 				title: 'Oops...',
 				text: 'No puede eliminarse a si mismo!',
 			})
-		}
-		//console.log(idUsuarioDelete)
-		Swal.fire({
-			title: 'Esta segur@?',
-			text: "¡Una vez elimines el usuario, los cambios NO se puede deshacer!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Si, Eliminar',
-			cancelButtonText: 'No',
-		}).then((result) => {
-			if (result.isConfirmed) {
+		}else{
 
-				this.usuarioService.eliminarUsuario(idUsuarioDelete).subscribe(resp => {
-					this.usuarios.splice(indice, 1);
-					Swal.fire(
-						'Usuario Eliminado!',
-						'¡Se ha eliminado satisfactoriamente el usuario!',
-						'success'
-					)
-				})
-				
-			}
-		})
+			Swal.fire({
+				title: 'Esta segur@?',
+				text: "¡Una vez elimines el usuario, los cambios NO se puede deshacer!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Si, Eliminar',
+				cancelButtonText: 'No',
+			}).then((result) => {
+				if (result.isConfirmed) {
+	
+					this.usuarioService.eliminarUsuario(idUsuarioDelete).subscribe(resp => {
+						this.usuarios.splice(indice, 1);
+						Swal.fire(
+							'Usuario Eliminado!',
+							'¡Se ha eliminado satisfactoriamente el usuario!',
+							'success'
+						)
+					})
+					
+				}
+			})
+
+		}
+		
 
 
 	}

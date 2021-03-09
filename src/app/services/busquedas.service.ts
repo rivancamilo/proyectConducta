@@ -12,16 +12,16 @@ const base_url = environment.base_url;
 })
 export class BusquedasService {
 
-	constructor(private http: HttpClient,) { }
+	constructor(private http: HttpClient) { }
 
 	get token(): string {
 		return localStorage.getItem('token') || '';
 	}
 
 	private transFormarUsuarios( resultados:any[] ):Usuario[]{
-		return resultados.map( user => new Usuario(user.userNombres,user.userApellidos, 
-			user.userEmail, user.userEstado, user.userRolID,'',user.userContacto,'',
-			user.userSobreMi,user.userAvatar,user._id))
+		return resultados.map( datos => new Usuario(datos.userNombres, datos.userApellidos, 
+			datos.userEmail, datos.userEstado, datos.userRolID, '' , datos.userContacto, '', 
+			datos.userSobreMi, datos.userAvatar, datos._id))
 	}
 
 	private transFormarPacientes( resultados:any[] ):Paciente[]{
@@ -38,15 +38,12 @@ export class BusquedasService {
 			}
 		}).pipe( 
 			map( (resp:any) => {
-			
+				//return resp.resultados
 				switch (tipo) {
 					case 'usuarios':
 						return this.transFormarUsuarios(resp.resultados);
-						break;
-					case 'pacientes':
-						return this.transFormarPacientes(resp.resultados);
-							break;
 					default:
+						return this.transFormarPacientes(resp.resultados);
 						break;
 				}
 

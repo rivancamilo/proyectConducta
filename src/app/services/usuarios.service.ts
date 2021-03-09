@@ -113,12 +113,7 @@ export class UsuariosService {
 				}))
 	}
 
-	actualizaUsuario( data:perfilUsuario ){
-		//http://localhost:3800/api/usuarios/5ffb6522a6303a183c79d969
-		const datos = { ...data , formulario:'perfil' }
-		return this.http.put<any>(`${base_url}usuarios/${this.idUser}`, datos , this.headers)
-
-	}
+	
 
 	eliminarUsuario(IDusuario){
 		//http://localhost:3800/api/usuarios/5ffb6522a6303a183c79d969
@@ -139,8 +134,14 @@ export class UsuariosService {
 				} ))
 	}
 
+	actualizaUsuario( data:perfilUsuario ){
+		//http://localhost:3800/api/usuarios/5ffb6522a6303a183c79d969
+		const datos = { ...data , formulario:'perfil' }
+		return this.http.put<any>(`${base_url}usuarios/${this.idUser}`, datos , this.headers)
 
-	editarUsuarios( data, idUsuario ){
+	}
+
+	editarUsuarios( data:perfilUsuario, idUsuario:String ){
 		//http://localhost:3800/api/usuarios/601caa227f208b1fd4a91f25
 		
 		const datos = { ...data, formulario:'usuario' }
