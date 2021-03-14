@@ -7,9 +7,7 @@ const { getPacientes, crearPacientes, updatePacientes, deletePacientes, getPacie
 
 router.get('/', getPacientes )
 router.get('/:id', getPaciente )
-router.post('/', 
-            [ 
-            ] , crearPacientes );
+router.post('/', crearPacientes );
         
 router.put('/:id', updatePacientes )
 

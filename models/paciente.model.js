@@ -1,19 +1,17 @@
 const { Schema, model } = require('mongoose')
 
 const PacienteSchema = Schema({
-    pacienteNombres:    { type: String,     required:true },
-    pacienteApellidos:  { type: String,     required:true },
-    pacienteTipoID:     { type: String,     required:true },
+    pacienteNombres:    { type: String,     required:true, trim: true },
+    pacienteApellidos:  { type: String,     required:true, trim: true },
+    pacienteTipoID:     { type: String,     required:true, trim: true },
     pacienteNumID:      { type: String,     required:true, unique:true },
-    pacienteDateNaci:   { type: String,     required:true },
-    pacienteEPS:        { type: String,     required:true },
-    pacienteCiudad:     { type: String,     required:true },
-    pacienteDireccion:  { type: String,     required:true },
-    pacienteEdad:       { type: String,     required:true },
-    pacienteFoto:       { type: String },
-    //usuario:            { type: Schema.Types.ObjectId, ref:'Usuarios'}
-    
-}, { collections: 'pacientes' })
+    pacienteDateNaci:   { type: String,     required:true, trim: true },
+    pacienteEPS:        { type: String,     required:true, trim: true },
+    pacienteCiudad:     { type: String,     required:true, trim: true },
+    pacienteDireccion:  { type: String,     required:true, trim: true },
+    pacienteEdad:       { type: String,     required:true, trim: true },
+    pacienteFoto:       { type: String }
+})
 
 
 /**************************************************************************************** 

@@ -44,6 +44,20 @@ const getEntrenamientos = async (req,res = response) => {
 
 }
 
+const getEntrenamientoPaciente = async (req,res = response) => {
+    
+    const idPaciente = req.params.id;
+    //ejecutamos ambas consultas al mismo tiempo
+
+    const entrenamiento = await Entrenamiento.find({paciente:idPaciente})
+    //http://localhost:3800/api/entrenamiento/paciente/6046f17909d8634f843d294b
+   
+    res.json({
+        ok:true,
+        entrenamientos:entrenamiento
+    })
+
+}
 
 const crearEntrenamiento = async (req,res = response ) =>{
 
@@ -80,7 +94,8 @@ const crearEntrenamiento = async (req,res = response ) =>{
 module.exports= {
     getEmociones,
     crearEntrenamiento,
-    getEntrenamientos
+    getEntrenamientos,
+    getEntrenamientoPaciente
 }
 
 

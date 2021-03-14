@@ -133,9 +133,9 @@ const updateUsuario = async (req, res = response ) => {
             const passwordEncript = bcryptjs.hashSync( userPassword, salt )
             const datos = {
                 userPassword:passwordEncript,
-                campos
+                ...campos
             }
-
+            console.log(datos);
             const usuarioActualizado = await Usuario.findByIdAndUpdate(idUser,datos, { new:true, useFindAndModify: false })
             res.json({
                 ok:true,

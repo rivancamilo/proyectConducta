@@ -45,11 +45,11 @@ const getBuscaCollention = async (req, res = response) => {
         switch (tabla) {
 
             case 'usuarios':
-                data = await Usuario.find({ userNombres:regEx, userApellidos:regEx, userEmail: regEx });
+                data = await Usuario.find({ userEmail: regEx });
                 break;
 
             case 'pacientes':
-                data = await Paciente.find({ pacienteNombres:regEx, pacienteNumID:regEx, pacienteCiudad:regEx})
+                data = await Paciente.find({ pacienteNumID:regEx })
                     break;
             default:
                 res.status(400).json({
