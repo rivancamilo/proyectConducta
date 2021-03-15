@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { GraficasComponent } from './graficas/graficas.component';
+
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     EntrenamientosComponent,
     PacienteComponent,
     PacientesComponent,
+    GraficasComponent,
     
   ],
   exports:[

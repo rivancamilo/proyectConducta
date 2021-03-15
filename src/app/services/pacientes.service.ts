@@ -27,7 +27,7 @@ export class PacientesService {
 		}
 	}
 
-	crearPaciente(data) {
+	crearPaciente(data:Paciente) {
 		//http://localhost:3800/api/pacientes
 		return this.http.post<any>(`${base_url}pacientes`, data, this.headers)
 			.pipe(map((res) => {

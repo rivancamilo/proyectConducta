@@ -29,10 +29,13 @@ export class PacienteComponent implements OnInit {
 	) {
 		this.crearFormulario();
 		this.idPaciente = this.routerParams.snapshot.paramMap.get('id');
-		this.cargarDatosPaciente();
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		if(this.idPaciente){
+			this.cargarDatosPaciente();
+		}
+	}
 
 
 	crearFormulario() {

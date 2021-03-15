@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 	crearFormulario() {
 		this.loginUser = this.fb.group({
 			userEmail:[ localStorage.getItem('email') || 'mario@email.com', [ Validators.required ]],
-			userPassword:['123', [ Validators.required ]],
+			userPassword:['1234', [ Validators.required ]],
 			userSaveDatos:[  false ]
 		})
 	}

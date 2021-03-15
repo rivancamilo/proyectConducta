@@ -49,8 +49,29 @@ export class EntrenamientoService {
 		return this.http.get<any>(`${base_url}entrenamiento/lista?desde=${desde}`, this.headers)
 						.pipe(map(res => {
 							return {
+								entrenamientos: res.entrenamientos,
+								total:res.total,
+							}
+						}))
+	}
+
+	getEntrenamientoPaciente(idPaciente){
+		//http://localhost:3800/api/entrenamiento/paciente/6046f17909d8634f843d294b
+		return this.http.get<any>(`${base_url}entrenamiento/paciente/${idPaciente}`, this.headers)
+						.pipe(map(res => {
+							return {
 								entrenamientos: res.entrenamientos
 							}
 						}))
 	}
+
+
+	deleteEntrenamiento(idPrueba){
+		return this.http.delete(`${base_url}entrenamiento/${idPrueba}`)
+	}
+
+
+
+
+
 }

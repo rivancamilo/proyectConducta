@@ -10,6 +10,7 @@ import { EntrenamientosComponent } from './entrenamientos/entrenamientos.compone
 import { PacienteComponent } from './paciente/paciente.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { GraficasComponent } from './graficas/graficas.component';
 
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
             { path:'usuario/:id', component:UsuarioComponent },
             { path:'entrenamiento/:id' , component:EntrenamientoComponent },
             { path:'entrenamientos', component:EntrenamientosComponent },
+            { path:'resultados/:id', component:GraficasComponent },
             { path:'paciente', component:PacienteComponent },
             { path:'paciente/:id', component:PacienteComponent },
             { path:'pacientes', component:PacientesComponent},

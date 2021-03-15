@@ -132,9 +132,13 @@ export class UsuarioComponent implements OnInit {
 
 		//console.log(this.nuevoUsuario.value)
 		this.userService.editarUsuarios( this.nuevoUsuario.value, this.idUsuario ).subscribe( (res) => {
+
+			
 			if(this.imageSubir){
 				this.subirImagen(res._id)
 			}
+
+
 			Swal.fire({
 				title:'Usuario Modificado',
 				text:'¡Se ha modificado el usuario satisfactoriamente!',
@@ -142,6 +146,8 @@ export class UsuarioComponent implements OnInit {
 			})
 			this.router.navigateByUrl('/dashboard/usuarios')
 			
+
+
 		},err =>{
 			
 			Swal.fire({
@@ -151,6 +157,8 @@ export class UsuarioComponent implements OnInit {
 			})
 
 		})
+
+
 	}
 
 	/*****************************************************************
