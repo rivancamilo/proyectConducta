@@ -1,5 +1,8 @@
 const { response } = require('express');
 const Paciente = require('../models/paciente.model');
+const Entrenamiento = require('../models/entrenamiento.model')
+
+
 const bcryptjs = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
 
@@ -139,12 +142,11 @@ const updatePacientes = async (req, res = response) => {
 const deletePacientes = async (req, res = response) => {
 
     const idPaciente = req.params.id;
-
     try {
         /*********************************************************************
         buscamos el paciente a eliminar
         *********************************************************************/
-        const pacienteDB = await Paciente.findById(idPaciente)
+        const pacienteDB = await Paciente.findById({_id:idPaciente})
         if (!pacienteDB) {
             return res.status(404).json({
                 ok: false,
@@ -152,7 +154,15 @@ const deletePacientes = async (req, res = response) => {
             })
         }
 
-        const pacienteDelete = await Paciente.findOneAndDelete(idPaciente)
+        const entrenamiento = await Entrenamiento.find({paciente:idPaciente})
+        //eliminamos los entrenamiento que tenga el paciente
+        if(entrenamiento){
+            for(let i=1; i<=entrenamiento.length;i++){
+                await Entrenamiento.findOneAndDelete({paciente:idPaciente})
+            }
+        }
+        //eliminamos el paciente
+        const pacienteDelete = await Paciente.findOneAndDelete({_id:idPaciente}) 
 
         res.json({
             ok: true,

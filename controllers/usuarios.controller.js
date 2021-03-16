@@ -180,8 +180,18 @@ const deleteUsuario = async (req, res = response ) =>{
                 msg:'el usuario no esta registrado'
             })
         }
+        if(req.idUserToken === idUser ){
 
-        const usuarioDelete = await Usuario.findOneAndDelete(idUser)
+            return res.status(404).json({
+                ok:false,
+                msg:'Error, El usuario tiene la sesion activa'
+            })
+
+
+        }else{
+            
+            const usuarioDelete = await Usuario.findOneAndDelete({_id:idUser})
+        }
 
         res.json({
             ok:true,
