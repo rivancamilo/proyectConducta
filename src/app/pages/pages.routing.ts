@@ -22,17 +22,17 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
 
-            { path: '', component: DashboardComponent },
-            { path: 'usuarios', component: UsuariosComponent },
-            { path:'usuario', component:UsuarioComponent },
-            { path:'usuario/:id', component:UsuarioComponent },
-            { path:'entrenamiento/:id' , component:EntrenamientoComponent },
-            { path:'entrenamientos', component:EntrenamientosComponent },
-            { path:'resultados/:id', component:GraficasComponent },
-            { path:'paciente', component:PacienteComponent },
-            { path:'paciente/:id', component:PacienteComponent },
-            { path:'pacientes', component:PacientesComponent},
-            { path:'perfil', component:PerfilComponent}
+            { path: '', component: DashboardComponent, data:{titulo:'Dashboard'} },
+            { path: 'usuarios', component: UsuariosComponent, data:{titulo:'Lista de Usuarios'} },
+            { path:'usuario', component:UsuarioComponent, data:{titulo:'Usuario'}},
+            { path:'usuario/:id', component:UsuarioComponent, data:{titulo:'Usuario'} },
+            { path:'entrenamiento/:id' , component:EntrenamientoComponent, data:{titulo:'Entrenamiento'} },
+            { path:'entrenamientos', component:EntrenamientosComponent, data:{titulo:'Lista de Entrenamientos'} },
+            { path:'resultados/:id', component:GraficasComponent, data:{titulo:'Resultados'} },
+            { path:'paciente', component:PacienteComponent, data:{titulo:'Paciente'} },
+            { path:'paciente/:id', component:PacienteComponent, data:{titulo:'Paciente'} },
+            { path:'pacientes', component:PacientesComponent, data:{titulo:'Lista de Pacientes'}},
+            { path:'perfil', component:PerfilComponent, data:{titulo:'Perfil de Usuario'}}
         ]
     },
 

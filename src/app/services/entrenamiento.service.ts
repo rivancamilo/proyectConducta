@@ -48,10 +48,12 @@ export class EntrenamientoService {
 
 		return this.http.get<any>(`${base_url}entrenamiento/lista?desde=${desde}`, this.headers)
 						.pipe(map(res => {
+							
 							return {
 								entrenamientos: res.entrenamientos,
 								total:res.total,
 							}
+							
 						}))
 	}
 
