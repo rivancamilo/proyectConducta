@@ -14,6 +14,7 @@ export class EntrenamientosComponent implements OnInit {
 	public entrenamientos: Entrenamiento[] = [];
 	public desde: number = 0;
 	public totalPruebas: number = 0;
+	public aviso:boolean= false;
 
 	constructor(
 		private entrenamientoService: EntrenamientoService
@@ -38,8 +39,12 @@ export class EntrenamientosComponent implements OnInit {
 
 	cargarPruebas() {
 		this.entrenamientoService.getEntrenamientos(this.desde).subscribe(res => {
-			this.totalPruebas = res.total;
-			this.entrenamientos = res.entrenamientos
+			if(res.entrenamientos.length === 0){
+				this.aviso = true;
+			}else{
+				this.totalPruebas = res.total;
+				this.entrenamientos = res.entrenamientos
+			}
 		})
 	}
 

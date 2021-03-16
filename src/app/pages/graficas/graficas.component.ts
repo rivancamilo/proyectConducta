@@ -34,7 +34,8 @@ export class GraficasComponent implements OnInit {
 	public tMomento1F2:number []= []
 	public tMomento2F2:number []= []
 	public tMomento1F3:number []= []
-	public totalEvolucion:number []= []
+	public totalEvolucion:number []= [];
+	public aviso:boolean = false;
 
 	constructor(private routerParams: ActivatedRoute,
 				private entrenamientoService: EntrenamientoService) { 
@@ -50,23 +51,32 @@ export class GraficasComponent implements OnInit {
 	datosPruebas(){
 		this.entrenamientoService.getEntrenamientoPaciente(this.idPaciente).subscribe( res => {
 			//recorremos el array de entrenamientos
-			res.entrenamientos.forEach( prueba => {
-				//graficas de fases
-				this.totalPromeFase1.unshift( Math.round( prueba.totalPromeFase1) );
-				this.totalPromeFase2.unshift( Math.round( prueba.totalPromeFase2) );
-				this.totalPromeFase3.unshift( Math.round( prueba.totalPromeFase3) );
-				this.lineChartLabels.unshift(prueba.dateAplicacion);
-				//graficas de momentos
-				this.tMomento1F1.unshift( Math.round(prueba.totalPromeM1Fase1) );
-				this.tMomento2F1.unshift( Math.round(prueba.totalPromeM2Fase1) );
-				this.tMomento1F2.unshift( Math.round(prueba.promedioM1Fase2) );
-				this.tMomento2F2.unshift( Math.round(prueba.promedioM2Fase2) );
-				this.tMomento1F3.unshift( Math.round(prueba.totalPromeFase3) );
-				//grafica de la evolucion
-				this.totalEvolucion.unshift( Math.round(prueba.totalEntrenamiento) );
+			if(res.entrenamientos.length === 0){
+				this.aviso = true;
+			}else{
+				//console.log(res.entrenamientos.length)
 
-			});
-			//***************************************************/
+				res.entrenamientos.forEach( prueba => {
+
+					console.log(prueba)
+					//graficas de fases
+					this.totalPromeFase1.unshift( Math.round( prueba.totalPromeFase1) );
+					this.totalPromeFase2.unshift( Math.round( prueba.totalPromeFase2) );
+					this.totalPromeFase3.unshift( Math.round( prueba.totalPromeFase3) );
+					this.lineChartLabels.unshift(prueba.dateAplicacion);
+					//graficas de momentos
+					this.tMomento1F1.unshift( Math.round(prueba.totalPromeM1Fase1) );
+					this.tMomento2F1.unshift( Math.round(prueba.totalPromeM2Fase1) );
+					this.tMomento1F2.unshift( Math.round(prueba.promedioM1Fase2) );
+					this.tMomento2F2.unshift( Math.round(prueba.promedioM2Fase2) );
+					this.tMomento1F3.unshift( Math.round(prueba.totalPromeFase3) );
+					//grafica de la evolucion
+					this.totalEvolucion.unshift( Math.round(prueba.totalEntrenamiento) );
+
+				});
+				//***************************************************/
+			}
+			
 
 		})
 		//agregamos al array las fases
