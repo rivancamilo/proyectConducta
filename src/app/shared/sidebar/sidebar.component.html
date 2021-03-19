@@ -10,7 +10,9 @@
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
                             {{ usuario.userNombres }}
-                            <span class="user-level">Administrator</span>
+
+                            <span class="user-level" *ngIf="opUsuario==='admin'">Administrator</span>
+                            <span class="user-level" *ngIf="opUsuario!='admin'">Usuario</span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -19,7 +21,7 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#profile">
+                                <a href="/dashboard/perfil">
                                     <span class="link-collapse">
                                         Editar Perfil
                                     </span>
@@ -107,7 +109,6 @@
                     <a routerLink="perfil">
                         <i class="far fa-address-card"></i>
                         <p>Perfil</p>
-                        <span class="badge badge-count">6</span>
                     </a>
                 </li>
                 
