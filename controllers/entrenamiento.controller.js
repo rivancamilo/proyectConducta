@@ -36,11 +36,12 @@ const getEntrenamientos = async (req,res = response) => {
                 .populate('paciente','pacienteNombres pacienteApellidos pacienteEdad pacienteFoto')
                 .sort({_id:'desc'})
                 .skip(desde)
-                .limit(5),
+                .limit(50),
 
         Entrenamiento.countDocuments()
 
     ])
+
     res.json({
         ok:true,
         total:total,
