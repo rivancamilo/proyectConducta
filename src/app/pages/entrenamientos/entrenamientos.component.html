@@ -19,10 +19,11 @@
     <div class="col-md-12">
         <div class="card" >
             <div class="card-body">
+                
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th scope="col"></th> 
+                        <tr> 
+                            <th scope="col">Fecha Examen</th>
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Edad</th>
                             <th scope="col">Total Fase 1</th>
@@ -35,14 +36,7 @@
                     <tbody>
         
                         <tr *ngFor="let item of entrenamientos;let j=index">
-                            <td>
-                                <i class="fas fa-check-double"></i>
-                                <!-- <a class="user-avatar">
-                                    <div class="avatar avatar-online">
-                                        <img alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                </a> -->
-                            </td>
+                            <td>{{ item.dateAplicacion }}</td>
                             <td>{{ item.paciente.pacienteNombres }} {{ item.paciente.pacienteApellidos }}</td>
                             <td>{{ item.paciente.pacienteEdad }}</td>
                             <td>{{ item.totalPromeFase1 | number:'2.0-1'}}</td>
@@ -74,16 +68,16 @@
 
     <div class="col-md-12">
         <div class="mt-1 mb-2">
-            <p class="text-muted"> Mostrando {{ desde }} - {{ desde+5 }} de {{ totalPruebas }}</p>
-            <ul class="pagination justify-content-center mb-5 mb-sm-0">
+            <p class="text-muted"> Mostrando {{ desde }} - {{ desde+50 }} de {{ totalPruebas }}</p>
+            <ul class="pagination justify-content-center mb-5 mb-sm-0" *ngIf="totalPruebas>=50">
                 <li class="page-item">
-                    <a class="page-link" (click)="cambiarPagina(-5)">
+                    <a class="page-link" (click)="cambiarPagina(-50)">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 </li>
         
                 <li class="page-item">
-                    <a class="page-link" (click)="cambiarPagina(5)">
+                    <a class="page-link" (click)="cambiarPagina(50)">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </li>

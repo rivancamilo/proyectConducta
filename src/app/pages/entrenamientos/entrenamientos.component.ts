@@ -38,7 +38,9 @@ export class EntrenamientosComponent implements OnInit {
 	}
 
 	cargarPruebas() {
+
 		this.entrenamientoService.getEntrenamientos(this.desde).subscribe(res => {
+			//console.log(res.entrenamientos)
 			if(res.entrenamientos.length === 0){
 				this.aviso = true;
 			}else{

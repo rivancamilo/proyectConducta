@@ -23,6 +23,7 @@ export class EntrenamientoService {
 			}
 		}
 	}
+	
 	getEmociones(desde){
 
 		//http://localhost:3800/api/entrenamiento?desde=5
@@ -41,6 +42,7 @@ export class EntrenamientoService {
 					return res.usuario
 				})) */
 	}
+
 
 	getEntrenamientos(desde){
 
