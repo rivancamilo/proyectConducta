@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 
 export class EntrenamientoComponent implements OnInit {
 
-	public numModulo = 1 ;
+	public numModulo = 1;
 	public idPaciente;
 	public imageTemp:any = '';
 	public nombrePaciente:string;
@@ -28,6 +28,8 @@ export class EntrenamientoComponent implements OnInit {
 	alertError2:Boolean = false;
 	alertError3:Boolean = false;
 	alertError4:Boolean = false;
+	alertError5:Boolean = false;
+	alertError6:Boolean = false;
 	
 	//atributos para guardat los promedios
 	promedioInsVerbal: number = 0.00;
@@ -54,6 +56,11 @@ export class EntrenamientoComponent implements OnInit {
 	f2CheckObserPm:Boolean=false;
 	f2CheckObserSm:Boolean=false;
 
+	primeraFaseFull:number = 0;
+	segundaFaseFull:number = 0;
+	pasoNextF2Full:number = 0;
+	pasoNextF3Full:number = 0;
+	terceraFaseFull:number = 0;
 	constructor(
 		private entrenamientoService: EntrenamientoService,
 		private fb: FormBuilder,
@@ -107,10 +114,10 @@ export class EntrenamientoComponent implements OnInit {
 		this.formEntrenamient = this.fb.group({
 
 			instruccionVerbal: this.fb.group({
-				diversion:[''],
-				emocion:[''], 
-				orgullologros:[''],
-				satisfaccion:[''],
+				diversion:[{value: '', disabled: true}],
+				emocion:[{value: '', disabled: true}], 
+				orgullologros:[{value: '', disabled: true}],
+				satisfaccion:[{value: '', disabled: true}],
 				tristeza:[''], 
 				alegria :[''],
 				miedo:[''],
@@ -119,10 +126,10 @@ export class EntrenamientoComponent implements OnInit {
 				sorpresa:[''],
 			}),
 			expresionFacial: this.fb.group({
-				diversion:[''],
-				emocion:[''], 
-				orgullologros:[''],
-				satisfaccion:[''],
+				diversion:[{value: '', disabled: true}],
+				emocion:[{value: '', disabled: true}], 
+				orgullologros:[{value: '', disabled: true}],
+				satisfaccion:[{value: '', disabled: true}],
 				tristeza:[''], 
 				alegria :[''],
 				miedo:[''],
@@ -131,10 +138,10 @@ export class EntrenamientoComponent implements OnInit {
 				sorpresa:[''],
 			}),
 			selectEmocion: this.fb.group({
-				diversion:[''],
-				emocion:[''], 
-				orgullologros:[''],
-				satisfaccion:[''],
+				diversion:[{value: '', disabled: true}],
+				emocion:[{value: '', disabled: true}], 
+				orgullologros:[{value: '', disabled: true}],
+				satisfaccion:[{value: '', disabled: true}],
 				tristeza:[''], 
 				alegria :[''],
 				miedo:[''],
@@ -155,10 +162,10 @@ export class EntrenamientoComponent implements OnInit {
 			f2ValImitacionSm:[''],
 			f2ObservacionImitacionSm:[''],
 			expresionEmocionVcotidiana: this.fb.group({
-				diversion:[''],
-				emocion:[''], 
-				orgullologros:[''],
-				satisfaccion:[''],
+				diversion:[{value: '', disabled: true}],
+				emocion:[{value: '', disabled: true}], 
+				orgullologros:[{value: '', disabled: true}],
+				satisfaccion:[{value: '', disabled: true}],
 				tristeza:[''], 
 				alegria :[''],
 				miedo:[''],
@@ -253,26 +260,27 @@ export class EntrenamientoComponent implements OnInit {
 
 	validInputInstruccionVerbal(){
 		//input de instruccion Verbal
-		const max = 3;
+		const max = 6;
 		let conta=0;
 		this.alertError1 = false;
 		let suma=0;
+		let auxConta=0;
 		const campos =[	'diversion','emocion', 'orgullologros','satisfaccion','tristeza', 'alegria',
 						'miedo','enojo', 'desagrado','sorpresa'];
-		//activamos todos los campos				
-		campos.forEach( (valor,i) =>{
-			this.formEntrenamient.get(`instruccionVerbal.${valor}`).enable();	
-		})
 
 		campos.forEach( (valor,i) =>{
 			//console.log(`valor: ${valor} - pocicion:${i}`)
 			let valorInput = this.formEntrenamient.get(`instruccionVerbal.${valor}`).value;
 			if(valorInput){
 				//validamos que el numero que ingreso sea Valido
-				if(Number(valorInput)>0 && Number(valorInput)<=10){
-					//contamos el nuemro de datos que el usuario ha ingresado
-					conta += 1;
-					suma += Number(valorInput);
+				if(Number(valorInput)>=0 && Number(valorInput)<=10){
+					
+					if(Number(valorInput)!= 0 ){//promediamos solo los que son diferentes a cero
+						conta += 1;//contamos el nuemro de datos que el usuario ha ingresado
+						suma += Number(valorInput);
+					}
+
+					auxConta += 1;
 				}else{
 
 					//mostramos el mensaje de Error
@@ -288,40 +296,39 @@ export class EntrenamientoComponent implements OnInit {
 				}
 			}	
 		})
-		this.promedioInsVerbal = (suma/max);
-		if(conta===max){
-			campos.forEach( (valor,i) =>{
-				let valorInput = this.formEntrenamient.get(`instruccionVerbal.${valor}`).value;
-				if(!valorInput){
-					this.formEntrenamient.get(`instruccionVerbal.${valor}`).disable();
-				}	
-			})
+
+		this.promedioInsVerbal = (suma/conta);
+		if( max===auxConta ){
+			this.primeraFaseFull = this.primeraFaseFull + 1 ; 
 		}
 
 	}
 
 	validInputExpresionFacial(){
 		//input de instruccion Verbal
-		const max = 3;
+		const max = 6;
 		let conta=0;
 		this.alertError2 = false;
 		let suma = 0;
+		let auxConta=0;
 		const campos =[	'diversion','emocion', 'orgullologros','satisfaccion','tristeza', 'alegria',
 						'miedo','enojo', 'desagrado','sorpresa'];
-		//activamos todos los campos				
-		campos.forEach( (valor,i) =>{
-			this.formEntrenamient.get(`expresionFacial.${valor}`).enable();	
-		})
 
 		campos.forEach( (valor,i) =>{
 			//console.log(`valor: ${valor} - pocicion:${i}`)
 			let valorInput = this.formEntrenamient.get(`expresionFacial.${valor}`).value;
 			if(valorInput){
 				//validamos que el numero que ingreso sea Valido
-				if(Number(valorInput)>0 && Number(valorInput)<=10){
+				if(Number(valorInput)>=0 && Number(valorInput)<=10){
+
 					//contamos el nuemro de datos que el usuario ha ingresado
-					conta += 1;
-					suma += Number(valorInput);
+					if(Number(valorInput)!= 0){
+						conta += 1;
+						suma += Number(valorInput);
+					}
+
+					auxConta += 1;
+
 				}else{
 
 					//mostramos el mensaje de Error
@@ -337,64 +344,54 @@ export class EntrenamientoComponent implements OnInit {
 				}
 			}	
 		})
-		this.promedioExpFacial = (suma/max);
-		if(conta===max){
-			campos.forEach( (valor,i) =>{
-				let valorInput = this.formEntrenamient.get(`expresionFacial.${valor}`).value;
-				if(!valorInput){
-					this.formEntrenamient.get(`expresionFacial.${valor}`).disable();
-				}	
-			})
 
+		this.promedioExpFacial = (suma/conta);
+		if(max === auxConta){
+			this.primeraFaseFull = this.primeraFaseFull + 1 ; 
 		}
 
 	}
 
+
 	validInputSelectEmocion(){
 		//input de instruccion Verbal
-		const max = 3;
+		const max = 6;
 		let conta=0;
 		this.alertError3 = false;
 		let suma = 0;
+		let auxConta:number = 0;
 		const campos =[	'diversion','emocion', 'orgullologros','satisfaccion','tristeza', 'alegria',
 						'miedo','enojo', 'desagrado','sorpresa'];
 		const Emociones =['Diversión','Emoción', 'Orgullo por los logros','Satisfacción','Tristeza', 'Alegría',
 						'Miedo','Enojo', 'Desagrado','Sorpresa'];
-		//activamos todos los campos				
-		campos.forEach( (valor,i) =>{
-			this.formEntrenamient.get(`selectEmocion.${valor}`).enable();
-			this.resulSelectEmocion.splice(0,max);//borramos todo el array
-		})
 
 		campos.forEach( (valor,i) =>{
-			//console.log(`valor: ${valor} - pocicion:${i}`)
+			
 			let valorInput = this.formEntrenamient.get(`selectEmocion.${valor}`).value;
 			if(valorInput){
 				//validamos que el numero que ingreso sea Valido
-				if(Number(valorInput)>0 && Number(valorInput)<=100){
+				if(Number(valorInput)>=0 && Number(valorInput)<=100){
 					//contamos el nuemro de datos que el usuario ha ingresado
-					conta += 1;
-					suma += Number(valorInput);
+					if(Number(valorInput)!=0){
+						conta += 1;
+						suma += Number(valorInput);
+					}
+
+					auxConta += 1;
 
 				}else{
 
 					//mostramos el mensaje de Error
 					this.alertError3 = true;
-					//bloqueamos los demas inputs hasta que el usuario cambie el valor
-					campos.forEach( (valor,i) =>{
-						let valorDos = this.formEntrenamient.get(`selectEmocion.${valor}`).value;
-						if(valorDos==null){
-							this.formEntrenamient.get(`selectEmocion.${valor}`).disable();	
-						}
-					})
 
 				}
 			}	
 		})
 
-		this.promedioSelecEmocion = (suma/max);
+		this.promedioSelecEmocion = (suma/conta);
 
-		if(conta===max){
+		if(auxConta===max){
+			this.segundaFaseFull = 1;
 			campos.forEach( (valor,i) =>{
 				
 				let valorInput = Number(this.formEntrenamient.get(`selectEmocion.${valor}`).value);
@@ -426,51 +423,75 @@ export class EntrenamientoComponent implements OnInit {
 		}
 	}
 	
+	validInputEmociones(){
+		this.alertError4 = false;
+		let val1 = Number(this.valf2ValEmocionManifesPm);
+		let val2 = Number(this.valf2ValRelatoPm);
+
+		if(val1<0 || val1 >100){
+			this.alertError4 = true;	
+		}else if(val2<0 || val2>100){
+			this.alertError4 = true;
+		}else if( val1 != null && val2 != null && val1 != 0 && val2 != 0  ){
+			this.pasoNextF2Full = 1;
+		}
+
+	}
+
+	validInputReconocimientos(){
+		this.alertError6 = false;
+		let val1 = Number(this.valf2ValEmocionIndicadaSm);
+		let val2 = Number(this.valf2ValImitacionSm);
+
+		if(val1<0 || val1 >100){
+			this.alertError6 = true;	
+		}else if(val2<0 || val2>100){
+			this.alertError6 = true;
+		}else if( val1 != null && val2 != null && val1 != 0 && val2 != 0  ){
+			this.pasoNextF3Full = 1;
+		}
+
+	}
+
 	validInputexpresionEmocionVcotidiana(){
 		//input de instruccion Verbal
-		const max = 3;
+		const max = 6;
 		let conta=0;
 		//this.alertError = false;
 		let suma = 0;
+		let auxConta:number = 0;
 		const campos =[	'diversion','emocion', 'orgullologros','satisfaccion','tristeza', 'alegria',
 						'miedo','enojo', 'desagrado','sorpresa'];
 		const Emociones =['Diversión','Emoción', 'Orgullo por los logros','Satisfacción','Tristeza', 'Alegría',
 						'Miedo','Enojo', 'Desagrado','Sorpresa'];
-		//activamos todos los campos				
-		campos.forEach( (valor,i) =>{
-			this.formEntrenamient.get(`expresionEmocionVcotidiana.${valor}`).enable();
-			this.resulSelectEmocion.splice(0,max);//borramos todo el array
-		})
+		
 
 		campos.forEach( (valor,i) =>{
 			//console.log(`valor: ${valor} - pocicion:${i}`)
 			let valorInput = this.formEntrenamient.get(`expresionEmocionVcotidiana.${valor}`).value;
 			if(valorInput){
 				//validamos que el numero que ingreso sea Valido
-				if(Number(valorInput)>0 && Number(valorInput)<=100){
+				if(Number(valorInput)>=0 && Number(valorInput)<=100){
 					//contamos el nuemro de datos que el usuario ha ingresado
-					conta += 1;
-					suma += Number(valorInput);
+					if(Number(valorInput)!=0){
+						conta += 1;
+						suma += Number(valorInput);
+					}
+
+					auxConta += 1;
 
 				}else{
-
 					//mostramos el mensaje de Error
-					//this.alertError = true;
-					//bloqueamos los demas inputs hasta que el usuario cambie el valor
-					campos.forEach( (valor,i) =>{
-						let valorDos = this.formEntrenamient.get(`expresionEmocionVcotidiana.${valor}`).value;
-						if(valorDos==null){
-							this.formEntrenamient.get(`expresionEmocionVcotidiana.${valor}`).disable();	
-						}
-					})
+					this.alertError5 = true;
 
 				}
 			}	
 		})
 
-		this.promedioEmociones = (suma/max);
+		this.promedioEmociones = (suma/conta);
 
-		if(conta===max){
+		if(auxConta===max){
+			this.terceraFaseFull = 1;
 			campos.forEach( (valor,i) =>{
 				
 				let valorInput = Number(this.formEntrenamient.get(`expresionEmocionVcotidiana.${valor}`).value);

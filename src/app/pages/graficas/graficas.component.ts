@@ -49,6 +49,7 @@ export class GraficasComponent implements OnInit {
 
 
 	datosPruebas(){
+
 		this.entrenamientoService.getEntrenamientoPaciente(this.idPaciente).subscribe( res => {
 			//recorremos el array de entrenamientos
 			if(res.entrenamientos.length === 0){
@@ -60,18 +61,18 @@ export class GraficasComponent implements OnInit {
 
 					console.log(prueba)
 					//graficas de fases
-					this.totalPromeFase1.unshift( Math.round( prueba.totalPromeFase1) );
-					this.totalPromeFase2.unshift( Math.round( prueba.totalPromeFase2) );
-					this.totalPromeFase3.unshift( Math.round( prueba.totalPromeFase3) );
-					this.lineChartLabels.unshift(prueba.dateAplicacion);
+					this.totalPromeFase1.push( Math.round( prueba.totalPromeFase1) );
+					this.totalPromeFase2.push( Math.round( prueba.totalPromeFase2) );
+					this.totalPromeFase3.push( Math.round( prueba.totalPromeFase3) );
+					this.lineChartLabels.push(prueba.dateAplicacion);
 					//graficas de momentos
-					this.tMomento1F1.unshift( Math.round(prueba.totalPromeM1Fase1) );
-					this.tMomento2F1.unshift( Math.round(prueba.totalPromeM2Fase1) );
-					this.tMomento1F2.unshift( Math.round(prueba.promedioM1Fase2) );
-					this.tMomento2F2.unshift( Math.round(prueba.promedioM2Fase2) );
-					this.tMomento1F3.unshift( Math.round(prueba.totalPromeFase3) );
+					this.tMomento1F1.push( Math.round(prueba.totalPromeM1Fase1) );
+					this.tMomento2F1.push( Math.round(prueba.totalPromeM2Fase1) );
+					this.tMomento1F2.push( Math.round(prueba.promedioM1Fase2) );
+					this.tMomento2F2.push( Math.round(prueba.promedioM2Fase2) );
+					this.tMomento1F3.push( Math.round(prueba.totalPromeFase3) );
 					//grafica de la evolucion
-					this.totalEvolucion.unshift( Math.round(prueba.totalEntrenamiento) );
+					this.totalEvolucion.push( Math.round(prueba.totalEntrenamiento) );
 
 				});
 				//***************************************************/

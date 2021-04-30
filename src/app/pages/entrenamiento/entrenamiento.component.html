@@ -171,7 +171,7 @@
                                     </div>
                                 </div>
 
-                                <div class="text-right mt-3 mb-3">
+                                <div class="text-right mt-3 mb-3" *ngIf="primeraFaseFull===2">
                                     <button class="btn btn-success mr-2"
                                         (click)="numModulo=numModulo+1">Siguiente</button>
                                 </div>
@@ -278,7 +278,7 @@
                                 <div class="d-flex flex-row bd-highlight mb-3 justify-content-between">
                                     <button class="btn btn-danger mr-2" (click)="numModulo=numModulo-1">Atrás</button>
 
-                                    <button class="btn btn-primary mr-2" (click)="numModulo=numModulo+1">Siguiente
+                                    <button class="btn btn-primary mr-2" (click)="numModulo=numModulo+1" *ngIf="segundaFaseFull===1">Siguiente
                                         Fase</button>
                                 </div>
 
@@ -293,7 +293,14 @@
                                     <div class="card-header">
                                         <h4 class="card-title">Reconocimiento de emociones propias</h4>
                                     </div>
+
                                     <div class="card-body">
+
+                                        <div *ngIf="alertError4" class="alert alert-danger" role="alert">
+                                            <strong>Error, </strong> has ingresado un valor que esta fuera del rango
+                                            permitido!
+                                        </div>
+
                                         <div class="d-flex row  justify-content-center  align-items-center">
                                             <div class="col-md-9">
                                                 <label for="f2CheckObserPm">Ingrese una calificación de acuerdo a la
@@ -303,12 +310,13 @@
                                                 <div class="form-check">
                                                     <label class="form-check-label">
                                                         <input class="form-check-input" type="checkbox"
-                                                            id="f2CheckObserPm" formControlName="f2CheckObserPm">
+                                                            id="f2CheckObserPm" formControlName="f2CheckObserPm" >
                                                         <span class="form-check-sign">Observaciones</span>
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
                                         <div class="d-flex row  justify-content-center bd-highlight align-items-center">
 
@@ -316,7 +324,7 @@
                                                 <div class="form-group">
                                                     <input type="number" class="form-control"
                                                         placeholder="Ingrese un valor de la escala Likert 0-100%"
-                                                        formControlName="f2ValEmocionManifesPm">
+                                                        formControlName="f2ValEmocionManifesPm" (keyup)="validInputEmociones()">
                                                 </div>
                                             </div>
 
@@ -374,7 +382,7 @@
                                                 <div class="form-group">
                                                     <input type="number" class="form-control" id="f2ValRelatoPm"
                                                         placeholder="Ingrese un valor de la escala Likert 0-100%"
-                                                        formControlName="f2ValRelatoPm">
+                                                        formControlName="f2ValRelatoPm" (keyup)="validInputEmociones()">
                                                 </div>
                                             </div>
 
@@ -416,7 +424,7 @@
                                     <button class="btn btn-danger mr-2" (click)="numModulo=numModulo-1">Atrás</button>
 
                                     <button class="btn btn-success mr-2"
-                                        (click)="numModulo=numModulo+1">Siguiente</button>
+                                        (click)="numModulo=numModulo+1" *ngIf="pasoNextF2Full===1">Siguiente</button>
                                 </div>
                             </div>
 
@@ -430,6 +438,12 @@
                                         <h4 class="card-title">Reconocimiento de emociones de otros</h4>
                                     </div>
                                     <div class="card-body">
+
+                                        <div *ngIf="alertError6" class="alert alert-danger" role="alert">
+                                            <strong>Error, </strong> has ingresado un valor que esta fuera del rango
+                                            permitido!
+                                        </div>
+
                                         <div class="d-flex row  justify-content-center  align-items-center">
                                             <div class="col-md-9">
                                                 <label for="f2CheckObserSm">Ingrese una calificación para emoción
@@ -452,7 +466,7 @@
                                                 <div class="form-group">
                                                     <input type="number" class="form-control"
                                                         placeholder="Ingrese un valor de la escala Likert 0-100"
-                                                        formControlName="f2ValEmocionIndicadaSm">
+                                                        formControlName="f2ValEmocionIndicadaSm" (keyup)="validInputReconocimientos()">
                                                 </div>
                                             </div>
 
@@ -503,6 +517,7 @@
 
                                             </div>
                                         </div>
+
                                         <!-- imprimimos la calificacion de acuerdo al valor ingresado -->
                                         <div class="d-flex row  justify-content-center bd-highlight align-items-center">
 
@@ -510,7 +525,7 @@
                                                 <div class="form-group">
                                                     <input type="number" class="form-control" id="f2ValImitacionSm"
                                                         placeholder="Ingrese un valor de la escala Likert 0-100"
-                                                        formControlName="f2ValImitacionSm">
+                                                        formControlName="f2ValImitacionSm" (keyup)="validInputReconocimientos()">
                                                 </div>
                                             </div>
 
@@ -551,7 +566,7 @@
                                 <div class="d-flex flex-row bd-highlight mb-3 justify-content-between">
                                     <button class="btn btn-danger mr-2" (click)="numModulo=numModulo-1">Atrás</button>
 
-                                    <button class="btn btn-primary mr-2" (click)="numModulo=numModulo+1">Siguiente
+                                    <button class="btn btn-primary mr-2" (click)="numModulo=numModulo+1" *ngIf="pasoNextF3Full==1">Siguiente
                                         Fase</button>
                                 </div>
 
@@ -567,7 +582,7 @@
                                         <h4 class="card-title">Instrucción Verbal </h4>
                                     </div>
                                     <div class="card-body">
-                                        <div *ngIf="alertError" class="alert alert-danger" role="alert">
+                                        <div *ngIf="alertError5" class="alert alert-danger" role="alert">
                                             <strong>Error, </strong> has ingresado un valor que esta fuera del rango
                                             permitido!
                                         </div>
@@ -662,7 +677,7 @@
                                     <button class="btn btn-danger mr-2" (click)="numModulo=numModulo-1">Atrás</button>
 
                                     <button class="btn btn-success mr-2"
-                                        (click)="numModulo=numModulo+1">Siguiente</button>
+                                        (click)="numModulo=numModulo+1" *ngIf="terceraFaseFull===1">Siguiente</button>
                                 </div>
 
                             </div>
