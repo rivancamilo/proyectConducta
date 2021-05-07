@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 
 export class EntrenamientoComponent implements OnInit {
 
-	public numModulo = 1;
+	public numModulo = 5;
 	public idPaciente;
 	public imageTemp:any = '';
 	public nombrePaciente:string;
@@ -260,6 +260,7 @@ export class EntrenamientoComponent implements OnInit {
 
 	validInputInstruccionVerbal(){
 		//input de instruccion Verbal
+		
 		const max = 6;
 		let conta=0;
 		this.alertError1 = false;
@@ -282,7 +283,6 @@ export class EntrenamientoComponent implements OnInit {
 
 					auxConta += 1;
 				}else{
-
 					//mostramos el mensaje de Error
 					this.alertError1 = true;
 					//bloqueamos los demas inputs hasta que el usuario cambie el valor
@@ -355,6 +355,8 @@ export class EntrenamientoComponent implements OnInit {
 
 	validInputSelectEmocion(){
 		//input de instruccion Verbal
+		this.resulSelectEmocion = [];
+
 		const max = 6;
 		let conta=0;
 		this.alertError3 = false;
@@ -454,6 +456,8 @@ export class EntrenamientoComponent implements OnInit {
 	}
 
 	validInputexpresionEmocionVcotidiana(){
+
+		this.resulSelectEmocion = [];
 		//input de instruccion Verbal
 		const max = 6;
 		let conta=0;
