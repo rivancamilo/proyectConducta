@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 
 export class EntrenamientoComponent implements OnInit {
 
-	public numModulo = 5;
+	public numModulo = 1;
 	public idPaciente;
 	public imageTemp:any = '';
 	public nombrePaciente:string;
